@@ -41,10 +41,10 @@ include("../includes/connexion.php");
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $vil['nomVille']; ?></td>
                                 <td>
-                                    <a type="button" class="btn btn-warning btn-rounded btn-icon" href="modifier.php">
+                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $vil['idVille']; ?>">
                                         <i class="typcn typcn-document-text"></i>
                                     </a>
-                                    <a type="button" class="btn btn-danger btn-rounded btn-icon" href="supprimer.php">
+                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $vil['idVille']; ?>">
                                         <i class="typcn typcn-trash"></i>
                                     </a>            
                                 </td>
