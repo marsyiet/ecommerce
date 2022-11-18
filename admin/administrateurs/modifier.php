@@ -3,7 +3,7 @@
 
   try{
     include("../includes/connexion.php");
-    $requete1 = connect()->prepare("SELECT * FROM administrateurs WHERE idAdmin= ?"); 
+    $requete1 = connect()->prepare("SELECT * FROM administrateurs WHERE id= ?"); 
     $requete1->execute(array($id));
     $reponse = $requete1->fetchAll();
 
@@ -15,12 +15,12 @@
       $error = "";
    
         
-      if(empty($nom)){ 
+      if(empty($login)){ 
         $error = "Veuillez remplir tous les champs"; 
         echo "error";
       }
       else{
-        $requete = connect()->prepare("UPDATE administrateurs SET  login = :login, password = :password WHERE idAdmin = :id1");
+        $requete = connect()->prepare("UPDATE administrateurs SET  login = :login, password = :password WHERE id = :id1");
         $requete->execute(array(
         'login' => $login,
         'password' => $password,
@@ -63,15 +63,15 @@
               <h4 class="card-title text-center">modifier un administrateur</h4>
               <form class="forms-sample" action="modifier.php" method="POST">
                 <div class="form-group">
-                  <input type="hidden"  class="form-control" id="exampleInputId" value="<?php foreach($reponse as $rep){echo $rep['idAdmin'];} ?>" name="id">
+                  <input type="hidden"  class="form-control" id="exampleInputId" value="<?php foreach($reponse as $rep){echo $rep['id'];} ?>" name="id">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputlogin">login</label>
-                  <input type="login" class="form-control" id="exampleInputlogin" placeholder="login"  value="<?php foreach($reponse as $rep){echo $rep['login'];} ?>" name="login">
+                  <input type="login" class="form-control" id="exampleInputlogin"  value="<?php foreach($reponse as $rep){echo $rep['login'];} ?>" name="login">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword4">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password"  value="<?php foreach($reponse as $rep){echo $rep['password'];} ?>" name="password">
+                  <input type="password" class="form-control" id="exampleInputPassword4"  value="<?php foreach($reponse as $rep){echo $rep['password'];} ?>" name="password">
                 </div>
                 <button type="submit" class="btn btn-primary mr-2" name="modifier" >Modifier</button>
                 <button class="btn btn-light">Cancel</button>

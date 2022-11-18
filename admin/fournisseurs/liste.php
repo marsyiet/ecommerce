@@ -52,13 +52,13 @@ include("../includes/connexion.php");
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $four['nom']; ?></td>
                                 <td><?php echo $four['mail']; ?></td>
-                                <td><?php echo $vil['nomVille']; ?></td>
-                                <td><?php echo $quar['nomQuartier']; ?></td>
+                                <td><?php echo $vil['nom']; ?></td>
+                                <td><?php echo $quar['nom']; ?></td>
                                 <td>
-                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $four['idFournisseur']; ?>">
+                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $four['id']; ?>">
                                         <i class="typcn typcn-edit"></i>
                                     </a>
-                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $four['idFournisseur']; ?>">
+                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $four['id']; ?>">
                                         <i class="typcn typcn-trash"></i>
                                     </a>            
                                 </td>

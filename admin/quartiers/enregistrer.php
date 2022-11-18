@@ -1,18 +1,18 @@
 <?php 
+  include("../includes/connexion.php");
     if (isset($_POST['enregistrer']))
     {
       $quartier = $_POST['quartier'];
 
       if(empty($quartier)){
-        $error = "Veuillez entrer votre login"; 
+        $error = "Veuillez entrer un nom de quartier existant"; 
         echo $error;
       }
       else{
-        include("../includes/connexion.php");
-        $requete = connect()->prepare("INSERT INTO quartiers(nomQuartier) VALUES(?)");
-        $requete->execute(array($quartier));
-        //var_dump($requete);die();
-        if($requete){
+        
+        $reqquar = connect()->prepare("INSERT INTO quartiers(nom) VALUES(?)");
+        $reqquar->execute(array($quartier));
+        if($reqquar){
           header("Location:enregistrer.php");
         }
       }

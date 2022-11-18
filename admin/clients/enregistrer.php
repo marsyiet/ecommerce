@@ -1,5 +1,14 @@
 <?php 
   
+  include("../includes/connexion.php");
+
+  $requete1 = connect()->prepare("SELECT * FROM villes WHERE etat = 0");
+  $requete1->execute();
+  $reponse1 = $requete1->fetchAll();
+
+  $requete2 = connect()->prepare("SELECT * FROM quartiers WHERE etat = 0");
+  $requete2->execute();
+  $reponse2 = $requete2->fetchAll();
 
   if (isset($_POST['enregistrer']))
   {
@@ -12,6 +21,10 @@
       $error = "Veuillez entrer votre login"; 
       echo $error;
     }
+    elseif(empty($mail)){ 
+      $error = "Veuillez entrer votre mail"; 
+      echo $error;
+    }
     elseif(empty($ville)){ 
       $error = "Veuillez entrer votre mot de passe"; 
       echo $error;
@@ -21,8 +34,7 @@
       echo $error;
     }
     else{
-      include("../includes/connexion.php");
-      $requete = connect()->prepare("INSERT INTO clients(nomClient,mail,ville,quartier) VALUES(?,?,?,?)");
+      $requete = connect()->prepare("INSERT INTO clients(nom,mail,ville,quartier) VALUES(?,?,?,?)");
       $requete->execute(array($nom,$mail,$ville,$quartier));
       if($requete){
         header("Location:enregistrer.php");
@@ -49,10 +61,10 @@
       <div class="col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title text-center">Enregistrer un produit</h4>
+              <h4 class="card-title text-center">Enregistrer un client</h4>
               <form class="forms-sample" action="enregistrer.php" method="POST">
                 <div class="form-group">
-                  <label for="exampleInputnom">Nom du produit</label>
+                  <label for="exampleInputnom">Nom du client</label>
                   <input type="text" class="form-control" id="exampleInputnom" placeholder="Nom" name="nom">
                 </div>
                 <div class="form-group">
@@ -61,14 +73,16 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputVille">Ville</label>
-                  <select class="form-control" id="exampleInputVille" name="ville">
-                    <option value="">--</option>
+                  <select class="js-example-basic-single w-100" name="ville" style="color:black">
+                    <?php foreach($reponse1 as $rep1){ ?>
+                    <option value="<?php echo $rep1['id']; ?>" ><?php echo $rep1['nom']; ?></option><?php } ?>
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputQuartier">Quartier</label>
-                  <select class="form-control" id="exampleInputQuartier" name="quartier">
-                    <option value="">--</option>
+                  <select class="js-example-basic-single w-100" name="quartier" style="color:black">
+                    <?php foreach($reponse2 as $rep2){ ?>
+                    <option value="<?php echo $rep2['id']; ?>" ><?php echo $rep2['nom']; ?></option><?php } ?>
                   </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2" name="enregistrer">Enregistrer</button>

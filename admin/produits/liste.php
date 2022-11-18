@@ -5,7 +5,7 @@ include("../includes/connexion.php");
   $requete = connect()->prepare("SELECT * FROM produits"); 
   $requete->execute();
   $produit = $requete->fetchAll();
-   
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +33,7 @@ include("../includes/connexion.php");
                                 <th>Libellé</th>
                                 <th>Cathégorie</th>
                                 <th>Date d'achat</th>
+                                <th>Quantité</th>
                                 <th>Actions</th>
                               </tr>
                             </thead>
@@ -49,11 +50,12 @@ include("../includes/connexion.php");
                                 <td><?php echo $prod['libelle']; ?></td>
                                 <td><?php echo $cat['libelle']; ?></td>
                                 <td><?php echo $prod['date']; ?></td>
+                                <td><?php echo $prod['qte']; ?></td>
                                 <td>
-                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $prod['idProduit']; ?>">
+                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $prod['id']; ?>">
                                         <i class="typcn typcn-edit"></i>
                                     </a>
-                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $prod['idProduit']; ?>">
+                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $prod['id']; ?>">
                                         <i class="typcn typcn-trash"></i>
                                     </a>            
                                 </td>

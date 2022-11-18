@@ -9,7 +9,7 @@
       }
       else{
         include("../includes/connexion.php");
-        $requete = connect()->prepare("INSERT INTO villes(nomVille) VALUES(?)");
+        $requete = connect()->prepare("INSERT INTO villes(nom) VALUES(?)");
         $requete->execute(array($ville));
         //var_dump($requete);die();
         if($requete){

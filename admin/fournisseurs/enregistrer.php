@@ -1,5 +1,12 @@
 <?php 
-  
+include("../includes/connexion.php");
+  $reqquar = connect()->prepare("SELECT * FROM quartiers");
+  $reqquar->execute();
+  $repquar = $reqquar->fetchAll();
+
+  $reqvil = connect()->prepare("SELECT * FROM villes");
+  $reqvil->execute();
+  $repvil = $reqvil->fetchAll();
 
   if (isset($_POST['enregistrer']))
   {
@@ -9,20 +16,20 @@
     $quartier = $_POST['quartier']; 
 
     if(empty($nom)){
-      $error = "Veuillez entrer votre login"; 
+      $error = "Veuillez entrer le nom"; 
       echo $error;
     }
     elseif(empty($ville)){ 
-      $error = "Veuillez entrer votre mot de passe"; 
+      $error = "Veuillez choisir une ville"; 
       echo $error;
     }
     elseif(empty($quartier)){ 
-      $error = "Veuillez entrer votre mot de passe"; 
+      $error = "Veuillez choisir un quartier"; 
       echo $error;
     }
     else{
-      include("../includes/connexion.php");
-      $requete = connect()->prepare("INSERT INTO fournisseurs(nomFournisseur,mail,ville,quartier) VALUES(?,?,?,?)");
+      
+      $requete = connect()->prepare("INSERT INTO fournisseurs(nom,mail,ville,quartier) VALUES(?,?,?,?)");
       $requete->execute(array($nom,$mail,$ville,$quartier));
       if($requete){
         header("Location:enregistrer.php");
@@ -61,14 +68,20 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputVille">Ville</label>
-                  <select class="form-control" id="exampleInputVille" name="ville">
+                  <select class="form-control" id="exampleville" name="ville">
                     <option value="">--</option>
+                    <?php foreach($repvil as $repv){ ?>
+                    <option value ="<?php echo $repv['id'] ?>"><?php echo $repv['nom']; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputQuartier">Quartier</label>
-                  <select class="form-control" id="exampleInputQuartier" name="quartier">
+                  <select class="form-control" id="examplequartier" name="quartier">
                     <option value="">--</option>
+                    <?php foreach($repquar as $repq){ ?>
+                    <option value="<?php echo $repq['id'] ?>"><?php echo $repq['nom']; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2" name="enregistrer">Enregistrer</button>

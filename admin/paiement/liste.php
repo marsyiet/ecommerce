@@ -2,7 +2,7 @@
 
 include("../includes/connexion.php");
     
-  $requete = connect()->prepare("SELECT * FROM paiement"); 
+  $requete = connect()->prepare("SELECT * FROM paiements WHERE etat = 0"); 
   $requete->execute();
   $paiement = $requete->fetchAll();
    
@@ -39,12 +39,12 @@ include("../includes/connexion.php");
                               foreach($paiement as $paie){ ?>
                               <tr>
                                 <td><?php echo $i; ?></td>
-                                <td><?php echo $paie['methode']; ?></td>
+                                <td><?php echo $paie['libelle']; ?></td>
                                 <td>
-                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $paie['idPaiement']; ?>">
+                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $paie['id']; ?>">
                                         <i class="typcn typcn-edit"></i>
                                     </a>
-                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $paie['idPaiement']; ?>">
+                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $paie['id']; ?>">
                                         <i class="typcn typcn-trash"></i>
                                     </a>            
                                 </td>

@@ -68,13 +68,13 @@ include("../includes/connexion.php");
                                 <td><?php echo $cli['nom']; ?></td>
                                 <td><?php echo $prod['nom']; ?></td>
                                 <td><?php echo $paie['libelle']; ?></td>
-                                <td><?php echo $vil['nomVille']; ?></td>
-                                <td><?php echo $quar['nomQuartier']; ?></td>
+                                <td><?php echo $vil['nom']; ?></td>
+                                <td><?php echo $quar['nom']; ?></td>
                                 <td>
-                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $com['idCommande']; ?>">
+                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $com['id']; ?>">
                                         <i class="typcn typcn-edit"></i>
                                     </a>
-                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $com['idCommande']; ?>">
+                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $com['id']; ?>">
                                         <i class="typcn typcn-trash"></i>
                                     </a>            
                                 </td>

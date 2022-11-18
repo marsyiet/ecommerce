@@ -18,7 +18,7 @@
           $req = $requete->fetchAll();
         
           if(count($req) == 1){
-            $_SESSION["id"] = $req[0]['idAdmin'];
+            $_SESSION["id"] = $req[0]['id'];
             
             $_SESSION["login"] = $req[0]['login'];
             header("Location: index.php");

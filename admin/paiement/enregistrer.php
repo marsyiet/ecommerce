@@ -1,17 +1,17 @@
 <?php 
+    include("../includes/connexion.php");
+
     if (isset($_POST['enregistrer']))
     {
-      $nom = $_POST['nom']; 
+      $paiement = $_POST['paiement']; 
 
-      if(empty($nom)){
-        $error = "Veuillez entrer un mode de paiement existant"; 
+      if(empty($paiement)){
+        $error = "Veuillez entrer votre paiement"; 
         echo $error;
       }
       else{
-        include("../includes/connexion.php");
-        $requete = connect()->prepare("INSERT INTO paiements(libelle) VALUES(?)");
-        $requete->execute(array($nom));
-        //var_dump($requete);die();
+        $reqpaie = connect()->prepare("INSERT INTO paiements(libelle) VALUES(?)");
+        $reqpaie->execute(array($paiement));
         if($requete){
           echo "ok";
           header("Location:enregistrer.php");
@@ -38,11 +38,11 @@
       <div class="col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title text-center">Enregistrer un mode de paiement</h4>
+              <h4 class="card-title text-center">Enregistrer une paiement</h4>
               <form class="forms-sample" action="enregistrer.php" method="POST">
                 <div class="form-group">
                   <label for="exampleInputnom">Libellé</label>
-                  <input type="text" class="form-control" id="exampleInputlibelle" placeholder="Libellé" name="nom">
+                  <input type="text" class="form-control" id="exampleInputlibelle" placeholder="Libellé" name="paiement">
                 </div>
                 <button type="submit" class="btn btn-primary mr-2" name="enregistrer">Enregistrer</button>
                 <button class="btn btn-light">Cancel</button>

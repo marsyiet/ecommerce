@@ -24,7 +24,7 @@ include("../includes/connexion.php");
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center">Liste des Utilisateurs</h4>
+                        <h4 class="card-title text-center">Liste des quartiers</h4>
                         <div class="table-responsive">
                           <table class="table">
                             <thead>
@@ -39,12 +39,12 @@ include("../includes/connexion.php");
                               foreach($quartier as $quar){ ?>
                               <tr>
                                 <td><?php echo $i; ?></td>
-                                <td><?php echo $quar['nomQuartier']; ?></td>
+                                <td><?php echo $quar['nom']; ?></td>
                                 <td>
-                                    <a type="button" class="btn btn-warning btn-rounded btn-icon" href="modifier.php">
+                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $quar['id']; ?>">
                                         <i class="typcn typcn-edit"></i>
                                     </a>
-                                    <a type="button" class="btn btn-danger btn-rounded btn-icon" href="supprimer.php">
+                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $quar['id']; ?>">
                                         <i class="typcn typcn-trash"></i>
                                     </a>            
                                 </td>
