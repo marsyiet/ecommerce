@@ -52,8 +52,8 @@ include("../includes/connexion.php");
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $cli['nom']; ?></td>
                                 <td><?php echo $cli['mail']; ?></td>
-                                <td><?php echo $vil['nom']; ?></td>
-                                <td><?php echo $quar['nom']; ?></td>
+                                <td><?php echo $cli['ville']; ?></td>
+                                <td><?php echo $cli['quartier']; ?></td>
                                 <td>
                                     <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $cli['id']; ?>">
                                         <i class="typcn typcn-edit"></i>

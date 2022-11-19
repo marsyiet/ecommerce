@@ -1,6 +1,6 @@
 <?php
   $id = $_GET['id'];
-
+  
   try{
     include("../includes/connexion.php");
     $requete1 = connect()->prepare("SELECT * FROM cathegories WHERE id= ?"); 
@@ -49,7 +49,7 @@
 <body>
 
 <div class="container-scroller">
-  <?php //include("../includes/navbar.html"); ?>
+  <?php include("../includes/navbar.html"); ?>
 <div class="container-fluid page-body-wrapper">
   <?php include("../includes/sidebar.html"); ?>
   <div class="main-panel">
@@ -57,7 +57,7 @@
       <div class="col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title text-center">modifier un administrateur</h4>
+              <h4 class="card-title text-center">modifier une Cathégorie</h4>
               <form class="forms-sample" action="modifier.php" method="POST">
                 <div class="form-group">
                   <input type="hidden"  class="form-control" id="exampleInputId" value="<?php foreach($reponse as $rep){echo $rep['id'];} ?>" name="id">

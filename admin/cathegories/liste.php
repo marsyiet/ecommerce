@@ -1,10 +1,10 @@
 <?php
 
-include("../includes/connexion.php");
+  include("../includes/connexion.php");
     
   $requete = connect()->prepare("SELECT * FROM cathegories"); 
   $requete->execute();
-  $cathegorie = $requete->fetchAll();
+  $reponse = $requete->fetchAll();
    
 ?>
 <!DOCTYPE html>
@@ -36,15 +36,15 @@ include("../includes/connexion.php");
                             </thead>
                             <tbody>
                               <?php $i = 1;
-                              foreach($cathegorie as $cat){ ?>
+                              foreach($reponse as $rep){ ?>
                               <tr>
                                 <td><?php echo $i; ?></td>
-                                <td><?php echo $cat['libelle']; ?></td>
+                                <td><?php echo $rep['libelle']; ?></td>
                                 <td>
-                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $cat['id']; ?>">
+                                    <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $rep['id']; ?>">
                                         <i class="typcn typcn-edit"></i>
                                     </a>
-                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $cat['id']; ?>">
+                                    <a type="button" class="btn btn-danger btn-rounded btn-icon"  href="supprimer.php?id=<?php  echo $rep['id']; ?>">
                                         <i class="typcn typcn-trash"></i>
                                     </a>            
                                 </td>

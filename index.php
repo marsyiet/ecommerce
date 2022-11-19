@@ -1,3 +1,10 @@
+<?php
+    include("admin/includes/connexion.php");
+
+    $requete = connect()->prepare("SELECT * FROM cathegories WHERE etat=0");
+    $requete->execute();
+    $reponse = $requete->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -119,7 +126,10 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <a href="#.php"><i class="fa fa-user"></i> Se connecter</a>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="inscription.php"><i class="fa fa-user"></i> S'inscrire</a>
                             </div>
                         </div>
                     </div>
@@ -179,17 +189,9 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            <?php foreach($reponse as $rep){ ?>
+                            <li><a href="#"><?php echo $rep['libelle'] ?></a></li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>

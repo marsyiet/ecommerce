@@ -48,7 +48,7 @@ include("../includes/connexion.php");
                               <tr>
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $prod['libelle']; ?></td>
-                                <td><?php echo $cat['libelle']; ?></td>
+                                <td><?php echo $prod['cathegorie']; ?></td>
                                 <td><?php echo $prod['date']; ?></td>
                                 <td><?php echo $prod['qte']; ?></td>
                                 <td>

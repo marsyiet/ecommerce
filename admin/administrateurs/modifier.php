@@ -1,6 +1,5 @@
 <?php
   $id = $_GET['id'];
-
   try{
     include("../includes/connexion.php");
     $requete1 = connect()->prepare("SELECT * FROM administrateurs WHERE id= ?"); 

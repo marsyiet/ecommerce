@@ -12,6 +12,7 @@
 
   if (isset($_POST['enregistrer']))
   {
+    
     $nom = $_POST['nom'];
     $mail = $_POST['mail'];
     $ville = $_POST['ville']; 
