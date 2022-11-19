@@ -48,10 +48,17 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="template/vendors/typicons/typicons.css">
-  <link rel="stylesheet" href="template/vendors/css/vendor.bundle.base.css">
-  <link rel="stylesheet" href="template/css/vertical-layout-light/style.css">
-  <link rel="shortcut icon" href="template/images/favicon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="ogani-master/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="ogani-master/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="ogani-master/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="ogani-master/css/nice-select.css" type="text/css">
+<link rel="stylesheet" href="ogani-master/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="ogani-master/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="ogani-master/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="ogani-master/css/style.css" type="text/css">
 </head>
 
 <body>
@@ -66,10 +73,10 @@
               <form class="forms-sample" action="inscription.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="exampleimage">Avatar</label>
-                  <input type="file" class="form-control form-control-lg" id="exampleimage"  name="image">
+                  <input type="file" class="form-control" id="exampleimage"  name="image">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputnom">Nom du client</label>
+                  <label for="exampleInputnom">Votre nom</label>
                   <input type="text" class="form-control" id="exampleInputnom" placeholder="Nom" name="nom">
                 </div>
                 <div class="form-group">
@@ -92,10 +99,10 @@
                 </div>
                 <div class="form-group">
                   <label for="password">Mot de passe</label>
-                  <input type="password" class="form-control form-control-lg" id="exampleInputpassword1" placeholder="password" name="password">
+                  <input type="password" class="form-control " id="exampleInputpassword1" placeholder="password" name="password">
                 </div>
                 <button type="submit" class="btn btn-primary mr-2 " style="background-color:green" name="enregistrer">M'enregistrer</button>
-                <button class="btn btn-light">Cancel</button>
+                <a type="button" href="index.php" class="btn btn-light">Cancel</button>
               </form>
             </div>
           </div>
@@ -106,14 +113,15 @@
   </div>
 </div>
 </div>
-<script src="template/vendors/js/vendor.bundle.base.js"></script>
-<script src="template/vendors/chart.js/Chart.min.js"></script>
-<script src="template/js/off-canvas.js"></script>
-<script src="template/js/hoverable-collapse.js"></script>
-<script src="template/js/template.js"></script>
-<script src="template/js/settings.js"></script>
-<script src="template/js/todolist.js"></script>
-<script src="template/js/dashboard.js"></script>
+<script src="ogani-master/js/jquery-3.3.1.min.js"></script>
+    <script src="ogani-master/js/bootstrap.min.js"></script>
+    <script src="ogani-master/js/jquery.nice-select.min.js"></script>
+    <script src="ogani-master/js/jquery-ui.min.js"></script>
+    <script src="ogani-master/js/jquery.slicknav.js"></script>
+    <script src="ogani-master/js/mixitup.min.js"></script>
+    <script src="ogani-master/js/owl.carousel.min.js"></script>
+    <script src="ogani-master/js/main.js"></script>
+
 </body>
 
 </html>
