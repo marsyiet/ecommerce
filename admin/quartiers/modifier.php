@@ -1,31 +1,29 @@
 <?php
   $id = $_GET['id'];
-
   try{
     include("../includes/connexion.php");
-    $reqquar = connect()->prepare("SELECT * FROM quartiers WHERE id= ?"); 
-    $reqquar->execute(array($id));
-    $repquar = $reqquar->fetchAll();
+    $requete1 = connect()->prepare("SELECT * FROM quartiers WHERE id= ?"); 
+    $requete1->execute(array($id));
+    $reponse = $requete1->fetchAll();
 
    if (isset($_POST['modifier'])){
 
-      $quartier = $_POST['quartier'];
+      $nom = $_POST['nom'];
       $id1 = $_POST['id'];
       $error = "";
    
         
-      if(empty($login)){ 
+      if(empty($nom)){ 
         $error = "Veuillez remplir tous les champs"; 
         echo "error";
       }
       else{
-        $requete = connect()->prepare("UPDATE administrateurs SET  quartier = :quartier  WHERE id = :id1");
+        $requete = connect()->prepare("UPDATE quartiers SET  nom = :nom WHERE id = :id1");
         $requete->execute(array(
-        'quartier' => $quartier,
+        'nom' => $nom,
         'id1' => $id1 ));
 
         if($requete){
-          echo "inscription ok";
           header("Location: liste.php");
         }
               
@@ -50,7 +48,7 @@
 <body>
 
 <div class="container-scroller">
-  <?php include("../includes/navbar.html"); ?>
+  <?php include("../includes/navbar.php"); ?>
 <div class="container-fluid page-body-wrapper">
   <?php include("../includes/sidebar.html"); ?>
   <div class="main-panel">
@@ -58,16 +56,16 @@
       <div class="col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title text-center">Modifier un quartier</h4>
+              <h4 class="card-title text-center">modifier un quartier</h4>
               <form class="forms-sample" action="modifier.php" method="POST">
                 <div class="form-group">
-                  <input type="hidden"  class="form-control" id="exampleInputId" value="<?php foreach($repquar as $quar){echo $quar['id'];} ?>" name="id">
+                  <input type="hidden"  class="form-control" id="exampleInputId" value="<?php foreach($reponse as $rep){echo $rep['id'];} ?>" name="id">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputnom">Quartier</label>
-                  <input type="text" class="form-control" id="exampleInputNom" value="<?php foreach($repquar as $quar){ echo $quar['nom'];}?>" name="quartier">
+                  <label for="nom">Libellé</label>
+                  <input type="login" class="form-control" id="nom"  value="<?php foreach($reponse as $rep){echo $rep['nom'];} ?>" name="nom">
                 </div>
-                <button type="submit" class="btn btn-primary mr-2" name="modifier">Modifier</button>
+                <button type="submit" class="btn btn-primary mr-2" name="modifier" >Modifier</button>
                 <button class="btn btn-light">Cancel</button>
               </form>
             </div>

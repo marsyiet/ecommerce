@@ -13,9 +13,9 @@
   if (isset($_POST['enregistrer']))
   {
     $image = $_FILES['image']['name'];
-    $libelle = $_POST['libelle'];
+    $nom = $_POST['nom'];
     $cathegorie = $_POST['cathegorie'];
-    $fourisseur = $_POST['fourisseur']; 
+    $fournisseur = $_POST['fournisseur']; 
     $date = $_POST['date']; 
     $qte = $_POST['qte'];
 
@@ -23,7 +23,7 @@
     $extensions_autorisees = array('jpg', 'jpeg', 'gif', 'png');
     $extension_upload = strtolower(  substr(  strrchr($_FILES['image']['name'], '.')  ,1)  );
 
-    if(empty($libele) && empty($cathegorie) && empty($fournisseur) && empty($image) && empty($date)){
+    if(empty($nom) && empty($cathegorie) && empty($fournisseur) && empty($date) && empty($qte)){
       $error = "Veuillez remplir tous les champs"; 
       echo $error;
     }
@@ -31,8 +31,8 @@
         if (in_array($extension_upload, $extensions_autorisees))
         {            
           echo "extension correcte";
-          $requete = connect()->prepare("INSERT INTO clients(image,libelle,cathegorie,fournisseur,dte,qte) VALUES(?,?,?,?,?,?)");
-          $requete->execute(array($image,$libelle,$cathegorie,$fournisseur,$dte,$qte));
+          $requete = connect()->prepare("INSERT INTO produits(image,libelle,cathegorie,fournisseur,date,qte) VALUES(?,?,?,?,?,?)");
+          $requete->execute(array($image,$nom,$cathegorie,$fournisseur,$date,$qte));
         }else{
           echo "format de l'image incorrect; veuillez entrer une image aux formats 'jpg', 'jpeg', 'gif', 'png'";
         }            
@@ -54,7 +54,7 @@
 <body>
 
 <div class="container-scroller">
-  <?php include("../includes/navbar.html"); ?>
+  <?php include("../includes/navbar.php"); ?>
 <div class="container-fluid page-body-wrapper">
   <?php include("../includes/sidebar.html"); ?>
   <div class="main-panel">
@@ -65,41 +65,37 @@
               <h4 class="card-title text-center">Enregistrer un produit</h4>
               <form class="forms-sample" action="enregistrer.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                  <label for="image">Image</label>
-                  <input type="file" class="form-control form-control-lg" id="exampleimage"  name="image">
+                  <label for="exampleimage">Image</label>
+                  <input type="file" class="form-control" id="exampleimage"  name="image">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputnom">Nom du produit</label>
-                  <input type="text" class="form-control" id="exampleInputnom" placeholder="Nom" name="libelle">
+                  <label for="exampleInputnom">Libelle</label>
+                  <input type="text" class="form-control" id="exampleInputnom" placeholder="Libellé" name="nom">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword4">Cathégorie</label>
-                  <select class="form-control" id="exampleInput1" name="cathegorie">
-                    <option value="">--</option>
-                    <?php foreach($reponse1 as $cat){ ?>
-                    <option ><?php echo $cat['libelle'] ?></option>
-                    <?php } ?>
+                  <label for="exampleInputVille">Cathégories</label>
+                  <select class="js-example-basic-single w-100" name="cathegorie" style="color:black">
+                    <?php foreach($reponse1 as $rep1){ ?>
+                    <option value="<?php echo $rep1['id']; ?>" ><?php echo $rep1['libelle']; ?></option><?php } ?>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword4">Fournisseur</label>
-                  <select class="form-control" id="exampleInput1" name="fournisseur">
-                    <option value="">--</option>
-                    <?php foreach($reponse2 as $four){ ?>
-                    <option ><?php echo $four['nom'] ?></option>
-                    <?php } ?>
+                  <label for="exampleInputQuartier">fournisseurs</label>
+                  <select class="js-example-basic-single w-100" name="fournisseur" style="color:black">
+                    <?php foreach($reponse2 as $rep2){ ?>
+                    <option value="<?php echo $rep2['id']; ?>" ><?php echo $rep2['nom']; ?></option><?php } ?>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputDate">Date d'acquisition</label>
-                  <input type="date" class="form-control" id="exampleInputDate" name="date">
+                  <label for="password">Date d'acquisition</label>
+                  <input type="date" class="form-control " id="exampleInputDate" name="date">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputqte">Quantité</label>
-                  <input type="number" class="form-control" id="exampleInputDate" name="qte">
+                  <label for="exampleInputnom">Quantité</label>
+                  <input type="number" class="form-control" id="exampleInputMail" name="qte">
                 </div>
-                <button type="submit" class="btn btn-primary mr-2" name="enregistrer">Enregistrer</button>
-                <button class="btn btn-light">Cancel</button>
+                <button type="submit" class="btn btn-primary mr-2 "  name="enregistrer">Enregistrer</button>
+                <a type="button" href="index.php" class="btn btn-light">Cancel</button>
               </form>
             </div>
           </div>

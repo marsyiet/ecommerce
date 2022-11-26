@@ -65,7 +65,7 @@
 <body>
 
 <div class="container-scroller">
-  <?php include("../includes/navbar.html"); ?>
+  <?php include("../includes/navbar.php"); ?>
 <div class="container-fluid page-body-wrapper">
   <?php include("../includes/sidebar.html"); ?>
   <div class="main-panel">
@@ -73,7 +73,7 @@
       <div class="col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title text-center">modifier un administrateur</h4>
+              <h4 class="card-title text-center">modifier un fournisseur</h4>
               <form class="forms-sample" action="modifier.php" method="POST">
                 <div class="form-group">
                   <input type="hidden"  class="form-control" id="exampleInputId" value="<?php foreach($reponse as $rep){echo $rep['id'];} ?>" name="id">
@@ -87,12 +87,12 @@
                   <input type="mail" class="form-control" id="exampleInputlogin"  value="<?php foreach($reponse as $rep){echo $rep['mail'];} ?>" name="mail">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword4">Password</label>
-                  <input type="text" class="form-control" id="exampleInputPassword4"  value="<?php foreach($reponse as $rep){echo $repvil['nom'];} ?>" name="ville">
+                  <label for="exampleInputPassword4">Ville</label>
+                  <input type="text" class="form-control" id="exampleInputville"  value="<?php foreach($repvil as $vil){echo $vil['nom'];} ?>" name="ville">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword4">Password</label>
-                  <input type="text" class="form-control" id="exampleInputPassword4"  value="<?php foreach($reponse as $rep){echo $repquar['nom'];} ?>" name="quartier">
+                  <label for="exampleInputPassword4">Quartier</label>
+                  <input type="text" class="form-control" id="exampleInputquartier"  value="<?php foreach($repquar as $quar){echo $quar['nom'];} ?>" name="quartier">
                 </div>
                 <button type="submit" class="btn btn-primary mr-2" name="modifier" >Modifier</button>
                 <button class="btn btn-light">Cancel</button>

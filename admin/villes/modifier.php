@@ -1,6 +1,5 @@
 <?php
   $id = $_GET['id'];
-
   try{
     include("../includes/connexion.php");
     $requete1 = connect()->prepare("SELECT * FROM villes WHERE id= ?"); 
@@ -9,23 +8,22 @@
 
    if (isset($_POST['modifier'])){
 
-      $nom = $_POST['ville'];
+      $nom = $_POST['nom'];
       $id1 = $_POST['id'];
       $error = "";
    
         
-      if(empty($login)){ 
+      if(empty($nom)){ 
         $error = "Veuillez remplir tous les champs"; 
         echo "error";
       }
       else{
-        $requete = connect()->prepare("UPDATE villes SET  nom = :nom  WHERE id = :id1");
+        $requete = connect()->prepare("UPDATE villes SET  nom = :nom WHERE id = :id1");
         $requete->execute(array(
         'nom' => $nom,
         'id1' => $id1 ));
 
         if($requete){
-          echo "inscription ok";
           header("Location: liste.php");
         }
               
@@ -50,7 +48,7 @@
 <body>
 
 <div class="container-scroller">
-  <?php include("../includes/navbar.html"); ?>
+  <?php include("../includes/navbar.php"); ?>
 <div class="container-fluid page-body-wrapper">
   <?php include("../includes/sidebar.html"); ?>
   <div class="main-panel">
@@ -58,16 +56,16 @@
       <div class="col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title text-center">Modifier une ville</h4>
+              <h4 class="card-title text-center">modifier une ville</h4>
               <form class="forms-sample" action="modifier.php" method="POST">
                 <div class="form-group">
                   <input type="hidden"  class="form-control" id="exampleInputId" value="<?php foreach($reponse as $rep){echo $rep['id'];} ?>" name="id">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputnom">Ville</label>
-                  <input type="text" class="form-control" id="exampleInputNom" value="<?php foreach($reponse as $rep){echo $rep['nom'];} ?>" name="ville">
+                  <label for="nom">Libellé</label>
+                  <input type="login" class="form-control" id="nom"  value="<?php foreach($reponse as $rep){echo $rep['nom'];} ?>" name="nom">
                 </div>
-                <button type="submit" class="btn btn-primary mr-2" name="modifier">Modifier</button>
+                <button type="submit" class="btn btn-primary mr-2" name="modifier" >Modifier</button>
                 <button class="btn btn-light">Cancel</button>
               </form>
             </div>

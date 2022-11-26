@@ -1,12 +1,13 @@
 <?php
-include("../includes/connexion.php");
+
   $id = $_GET['id'];
+  include("../includes/connexion.php");
 
   $reqcat = connect()->prepare("SELECT * FROM cathegories WHERE etat =0");
   $reqcat->execute();
   $repcat = $reqcat->fetchAll();
 
-  $reqfour = connect()->prepare("SELECT * FROM fournissuers WHERE etat =0");
+  $reqfour = connect()->prepare("SELECT * FROM fournisseurs WHERE etat =0");
   $reqfour->execute();
   $repfour = $reqfour->fetchAll();
 
@@ -19,6 +20,7 @@ include("../includes/connexion.php");
    if (isset($_POST['modifier'])){
 
       $libelle = $_POST['libelle'];
+      $cathegorie = $_POST['cathegorie'];
       $fournisseur = $_POST['fournisseur'];
       $date = $_POST['date'];
       $qte = $_POST['qte'];
@@ -31,9 +33,10 @@ include("../includes/connexion.php");
         echo "error";
       }
       else{
-        $requete = connect()->prepare("UPDATE produits SET  libelle = :libelle, fournisseur = :fournisseur, date = :date, qte = :qte  WHERE id = :id1");
+        $requete = connect()->prepare("UPDATE produits SET  libelle = :libelle, cathegorie = :cathegorie, fournisseur = :fournisseur, date = :date, qte = :qte  WHERE id = :id1");
         $requete->execute(array(
         'libelle' => $libelle,
+        'cathegorie' => $cathegorie,
         'fournisseur' => $fournisseur,
         'date' => $date,
         'qte' => $qte,
@@ -64,7 +67,7 @@ include("../includes/connexion.php");
 <body>
 
 <div class="container-scroller">
-  <?php include("../includes/navbar.html"); ?>
+  <?php include("../includes/navbar.php"); ?>
 <div class="container-fluid page-body-wrapper">
   <?php include("../includes/sidebar.html"); ?>
   <div class="main-panel">
@@ -75,13 +78,15 @@ include("../includes/connexion.php");
               <h4 class="card-title text-center">Modifier un produit</h4>
               <form class="forms-sample" action="modifier.php" method="POST">
                 <div class="form-group">
-                  <label for="exampleInputnom">Nom du produit</label>
-                  <input type="text" class="form-control" id="exampleInputnom" value="<?php foreach($repprod as $prod){ echo $prod['nom'];}?>" name="nom">
+                  <input type="hidden" class="form-control" id="exampleInputnom" value="<?php foreach($repprod as $prod){ echo $prod['id'];}?>" name="id">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputnom">Libellé</label>
+                  <input type="text" class="form-control" id="exampleInputnom" value="<?php foreach($repprod as $prod){ echo $prod['libelle'];}?>" name="libelle">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword4">Cathégorie</label>
                   <select class="form-control" id="exampleInput1" name="cathegorie">
-                    <option value="">--</option>
                     <?php foreach($repcat as $cat){ ?>
                     <option ><?php echo $cat['libelle'] ?></option>
                     <?php } ?>
@@ -89,20 +94,19 @@ include("../includes/connexion.php");
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword4">Fournisseur</label>
-                  <select class="form-control" id="exampleInput1" name="cathegorie">
-                    <option value="">--</option>
-                    <?php foreach($repprod as $prod){ ?>
-                    <option ><?php echo $prod['libelle'] ?></option>
+                  <select class="form-control" id="exampleInput1" name="fournisseur">
+                    <?php foreach($repfour as $four){ ?>
+                    <option ><?php echo $four['nom'] ?></option>
                     <?php } ?>
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputDate">Date d'acquisition</label>
-                  <input type="date" class="form-control" id="exampleInputDate" name="date">
+                  <input type="date" class="form-control" id="exampleInputDate" name="date" value="<?php foreach($repprod as $prod){ echo $prod['date'];}?>">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputqte">Quantité</label>
-                  <input type="number" class="form-control" id="exampleInputDate" name="qte">
+                  <input type="number" class="form-control" id="exampleInputDate" name="qte" value="<?php foreach($repprod as $prod){ echo $prod['qte'];}?>">
                 </div>
                 <button type="submit" class="btn btn-primary mr-2" name="modifier">Modifier</button>
                 <button class="btn btn-light">Cancel</button>

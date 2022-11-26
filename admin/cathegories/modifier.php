@@ -1,6 +1,5 @@
 <?php
   $id = $_GET['id'];
-  
   try{
     include("../includes/connexion.php");
     $requete1 = connect()->prepare("SELECT * FROM cathegories WHERE id= ?"); 
@@ -14,12 +13,12 @@
       $error = "";
    
         
-      if(empty($login)){ 
+      if(empty($libelle)){ 
         $error = "Veuillez remplir tous les champs"; 
         echo "error";
       }
       else{
-        $requete = connect()->prepare("UPDATE cathegories SET libelle = :libelle WHERE id = :id1");
+        $requete = connect()->prepare("UPDATE cathegories SET  libelle = :libelle WHERE id = :id1");
         $requete->execute(array(
         'libelle' => $libelle,
         'id1' => $id1 ));
@@ -49,7 +48,7 @@
 <body>
 
 <div class="container-scroller">
-  <?php include("../includes/navbar.html"); ?>
+  <?php include("../includes/navbar.php"); ?>
 <div class="container-fluid page-body-wrapper">
   <?php include("../includes/sidebar.html"); ?>
   <div class="main-panel">
@@ -57,14 +56,14 @@
       <div class="col-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title text-center">modifier une Cathégorie</h4>
+              <h4 class="card-title text-center">modifier une cathégorie</h4>
               <form class="forms-sample" action="modifier.php" method="POST">
                 <div class="form-group">
                   <input type="hidden"  class="form-control" id="exampleInputId" value="<?php foreach($reponse as $rep){echo $rep['id'];} ?>" name="id">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputlibelle4">Libellé</label>
-                  <input type="libelle" class="form-control" id="exampleInputlibelle4" value="<?php foreach($reponse as $rep){echo $rep['libelle'];} ?>" name="libelle">
+                  <label for="exampleInputlibelle">Libellé</label>
+                  <input type="login" class="form-control" id="exampleInputlibelle"  value="<?php foreach($reponse as $rep){echo $rep['libelle'];} ?>" name="libelle">
                 </div>
                 <button type="submit" class="btn btn-primary mr-2" name="modifier" >Modifier</button>
                 <button class="btn btn-light">Cancel</button>
@@ -80,3 +79,4 @@
 </body>
 
 </html>
+

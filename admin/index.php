@@ -15,6 +15,9 @@ if(isset($_SESSION["id"])){
     $reqcom->execute(array());
     $commande = $reqcom->fetchAll();
     $nbcommande = count($commande);
+    $reqadmin = connect()->prepare("SELECT login FROM administrateurs WHERE id = ?");
+    $reqadmin->execute(array($_SESSION['id']));
+    $admin = $reqadmin->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -48,14 +51,14 @@ if(isset($_SESSION["id"])){
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="../banqueImages/man.png" alt="profile"/>
-              <span class="nav-profile-name">Nom de l'administrateur</span>
+              <span class="nav-profile-name"><?php foreach($admin as $ad){echo $ad['login']; }?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
                 <i class="typcn typcn-cog-outline text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a class="dropdown-item" href="deconnexion.php">
                 <i class="typcn typcn-eject text-primary"></i>
                 Logout
               </a>
