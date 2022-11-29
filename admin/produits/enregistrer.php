@@ -18,12 +18,13 @@
     $fournisseur = $_POST['fournisseur']; 
     $date = $_POST['date']; 
     $qte = $_POST['qte'];
+    $prix = $_POST['prix'];
 
 
     $extensions_autorisees = array('jpg', 'jpeg', 'gif', 'png');
     $extension_upload = strtolower(  substr(  strrchr($_FILES['image']['name'], '.')  ,1)  );
 
-    if(empty($nom) && empty($cathegorie) && empty($fournisseur) && empty($date) && empty($qte)){
+    if(empty($nom) && empty($cathegorie) && empty($fournisseur) && empty($date) && empty($qte) && empty($prix)){
       $error = "Veuillez remplir tous les champs"; 
       echo $error;
     }
@@ -31,8 +32,8 @@
         if (in_array($extension_upload, $extensions_autorisees))
         {            
           echo "extension correcte";
-          $requete = connect()->prepare("INSERT INTO produits(image,libelle,cathegorie,fournisseur,date,qte) VALUES(?,?,?,?,?,?)");
-          $requete->execute(array($image,$nom,$cathegorie,$fournisseur,$date,$qte));
+          $requete = connect()->prepare("INSERT INTO produits(image,libelle,prix,cathegorie,fournisseur,date,qte) VALUES(?,?,?,?,?,?,?)");
+          $requete->execute(array($image,$nom,$prix,$cathegorie,$fournisseur,$date,$qte));
         }else{
           echo "format de l'image incorrect; veuillez entrer une image aux formats 'jpg', 'jpeg', 'gif', 'png'";
         }            
@@ -71,6 +72,10 @@
                 <div class="form-group">
                   <label for="exampleInputnom">Libelle</label>
                   <input type="text" class="form-control" id="exampleInputnom" placeholder="Libellé" name="nom">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputnom">Prix</label>
+                  <input type="number" class="form-control" id="exampleInputprix" name="prix">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputVille">Cathégories</label>

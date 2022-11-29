@@ -24,6 +24,7 @@
       $fournisseur = $_POST['fournisseur'];
       $date = $_POST['date'];
       $qte = $_POST['qte'];
+      $prix = $_POST['prix'];
       $id1 = $_POST['id'];
       $error = "";
    
@@ -33,9 +34,10 @@
         echo "error";
       }
       else{
-        $requete = connect()->prepare("UPDATE produits SET  libelle = :libelle, cathegorie = :cathegorie, fournisseur = :fournisseur, date = :date, qte = :qte  WHERE id = :id1");
+        $requete = connect()->prepare("UPDATE produits SET  libelle = :libelle, prix = :prix, cathegorie = :cathegorie, fournisseur = :fournisseur, date = :date, qte = :qte  WHERE id = :id1");
         $requete->execute(array(
         'libelle' => $libelle,
+        'prix' => $prix,
         'cathegorie' => $cathegorie,
         'fournisseur' => $fournisseur,
         'date' => $date,
@@ -83,6 +85,10 @@
                 <div class="form-group">
                   <label for="exampleInputnom">Libellé</label>
                   <input type="text" class="form-control" id="exampleInputnom" value="<?php foreach($repprod as $prod){ echo $prod['libelle'];}?>" name="libelle">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputqte">Prix</label>
+                  <input type="number" class="form-control" id="exampleInputprix" name="prix" value="<?php foreach($repprod as $prod){ echo $prod['prix'];}?>">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword4">Cathégorie</label>

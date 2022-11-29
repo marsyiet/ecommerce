@@ -31,6 +31,7 @@ include("../includes/connexion.php");
                               <tr>
                                 <th>N</th>
                                 <th>Libellé</th>
+                                <th>Prix</th>
                                 <th>Cathégorie</th>
                                 <th>Date d'achat</th>
                                 <th>Quantité</th>
@@ -48,6 +49,7 @@ include("../includes/connexion.php");
                               <tr>
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $prod['libelle']; ?></td>
+                                <td><?php echo $prod['prix']; ?></td>
                                 <td><?php echo $prod['cathegorie']; ?></td>
                                 <td><?php echo $prod['date']; ?></td>
                                 <td><?php echo $prod['qte']; ?></td>
