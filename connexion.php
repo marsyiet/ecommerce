@@ -73,8 +73,8 @@
     </div>
     </div>
     </div>
-    <?php include("admin/includes/footer.html"); ?>
   </div>
+  <?php include("admin/includes/footer.html"); ?>
 
   <script src="ogani-master/js/jquery-3.3.1.min.js"></script>
     <script src="ogani-master/js/bootstrap.min.js"></script>
