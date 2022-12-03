@@ -20,6 +20,31 @@
     $reqcli = connect()->prepare("SELECT nom FROM clients WHERE id = ?");
     $reqcli->execute(array($_SESSION['id']));
     $cli = $reqcli->fetchAll();
+
+
+    if (isset($_GET["s"]))
+        {
+        $_GET["terme"] = htmlspecialchars($_GET["terme"]); //pour sécuriser le formulaire contre les intrusions html
+                
+        $terme = $_GET["terme"];
+        $terme = trim($terme); //pour supprimer les espaces dans la requête de l'internaute
+        $terme = strip_tags($terme); //pour supprimer les balises html dans la requête
+            
+        if (isset($terme))
+        {
+        $terme = strtolower($terme);
+        $select_terme = connect()->prepare("SELECT image FROM produits WHERE image LIKE ?");
+        $select_terme->execute(array("%".$terme."%"));
+        $resultat=$select_terme->fetchAll();
+        //var_dump($resultat);die();
+        }
+        else
+        {
+        $message = "Vous devez entrer votre requete dans la barre de recherche";
+        }
+        }
+            
+        foreach($resultat as $re){echo $re['image'];}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -160,13 +185,13 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
+                            <form action="index.php" method="GET">
                                 <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <input type="text" placeholder="What do yo u need?" name="terme">
+                                <input type="submit"  name="s" value="Rechercher">
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -193,6 +218,7 @@
             </div>
         </div>
     </section>
+    
     <!-- Hero Section End -->
     <section class="featured spad">
         <div class="container">
@@ -226,6 +252,7 @@
                             </div>
                         </div>
                     <?php } ?>
+
             </div>
         </div>
     </section>

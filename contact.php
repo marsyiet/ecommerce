@@ -73,7 +73,7 @@ if(isset($_POST['envoyer'])){
           <form action="contact.php" method="post"  class="php-email-form">
             <div class="row">
               <div class="form-group col-md-6">
-                <input type="text" name="name" class="form-control"  placeholder="Your Name" required>
+                <input type="text" name="name" class="form-control"  placeholder="Your Name" >
               </div>
               <div class="form-group col-md-6">
                 <input type="email" class="form-control" name="email"  placeholder="Your Email" required>
@@ -86,7 +86,7 @@ if(isset($_POST['envoyer'])){
               <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
             </div>
             <div class="my-3">
-            <div class="text-center"><button type="submit" name="envoyer">Send Message</button></div>
+            <div class="text-center"><button type="submit" name="envoyer" class="site-btn">Send Message</button></div>
           </form>
         </div><!-- End Contact Form -->
 

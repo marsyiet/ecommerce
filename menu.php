@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(isset($_SESSION["id"])){
-        //var_dump($_SESSION['id']);die();
+
     include("admin/includes/connexion.php");
 
     $reqcli = connect()->prepare("SELECT nom FROM clients WHERE id = ?");

@@ -1,8 +1,9 @@
 <?php
-session_start();
+include("menu.php");
+
 if($_SESSION['id']){
 
-include("admin/includes/connexion.php");
+
 
     $requete = connect()->prepare("SELECT * FROM commandes WHERE etat = 1"); 
     $requete->execute();
@@ -18,9 +19,6 @@ include("admin/includes/connexion.php");
 <?php include("css.php"); ?> 
 </head>
 <body>
-
-    <?php include("menu.php"); ?>
-
       <!-- partial -->
       <div class="main-panel">
         <div class="row">
