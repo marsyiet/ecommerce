@@ -172,7 +172,6 @@
                         
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
-                                <i class="fa fa-account"></i>
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
@@ -181,7 +180,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="selection" style="height: 360px; overflow-Y: scroll; display: hidden">
+                     
+                    <div class="selection" style="max-height: 387px; overflow-Y: scroll;">
+                    <div class="quitter section-title"> 
+                        <h4>votre recherche</h4>
+                        <?php if(isset($_POST['quit'])){ ?> <style> .selection{ display: none ;} </style> <?php } ?>
+                    </div>
                     <?php 
                         if (isset($_POST['rechercher']) && isset($_POST['query']) && !empty($_POST['query'])) {
                             
@@ -196,7 +200,7 @@
                             foreach ($resultat as $re) { ?>
                                 <div class="col-lg-3 col-md-4 col-sm-6 ">
                                     <div class="featured__item">
-                                        <div class="featured__item__pic set-bg" data-setbg="images/<?php echo $re['image']; ?>" style="background-color: blue">
+                                        <div class="featured__item__pic set-bg" data-setbg="images/<?php echo $re['image']; ?>">
                                             <ul class="featured__item__pic__hover">
                                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
@@ -209,23 +213,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            <?php }}else{ foreach ($resultat as $re) {?>
-                        <div class="col-lg-3 col-md-4 col-sm-6 ">
-                            <div class="featured__item">
-                                <div class="featured__item__pic set-bg" data-setbg="images/<?php echo $re['image']; ?>" style="background-color: blue">
-                                    <ul class="featured__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="featured__item__text">
-                                    <h6><a href="#"><?php echo $re['libelle']; ?></a></h6>
-                                    <h5><?php echo $re['prix']; ?><span>  Fcfa</span></h5>
-                                </div>
-                            </div>
-                        </div>
-                    <?php}}?>
+                            <?php }
+        } else {
+            echo "aucun resultat"; ?>
+       <?php }} else { ?>
+        <style>
+            .selection{ display: none;}
+            </style>
+   <?php }?>
                     </div>
                     
                     <div class="hero__item set-bg" data-setbg>
@@ -249,7 +244,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>ARTICLES</h2>
+                        <h2>DERNIERS ARTICLES</h2>
                     </div>
                 </div>
             </div>
