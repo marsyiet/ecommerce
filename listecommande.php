@@ -72,6 +72,7 @@ if($_SESSION['id']){
       </div>
       <!-- main-panel ends -->
     </div>
+    <?php include("footer.php"); ?>
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->

@@ -42,7 +42,7 @@
                <div class="row">
                <?php foreach($repprod as $prod){ ?> <br> 
                  <div class="col-md-3">
-                 <a><img src="images/<?php echo $prod['image']; ?>" ></a><br>
+                 <a><img src="images/<?php echo $prod['image']; ?>" width="270" height="270"></a><br>
                </div>
                <?php } ?>
            </div> <!-- End .row -->

@@ -22,29 +22,7 @@
     $cli = $reqcli->fetchAll();
 
 
-    if (isset($_GET["s"]))
-        {
-        $_GET["terme"] = htmlspecialchars($_GET["terme"]); //pour sécuriser le formulaire contre les intrusions html
-                
-        $terme = $_GET["terme"];
-        $terme = trim($terme); //pour supprimer les espaces dans la requête de l'internaute
-        $terme = strip_tags($terme); //pour supprimer les balises html dans la requête
-            
-        if (isset($terme))
-        {
-        $terme = strtolower($terme);
-        $select_terme = connect()->prepare("SELECT image FROM produits WHERE image LIKE ?");
-        $select_terme->execute(array("%".$terme."%"));
-        $resultat=$select_terme->fetchAll();
-        //var_dump($resultat);die();
-        }
-        else
-        {
-        $message = "Vous devez entrer votre requete dans la barre de recherche";
-        }
-        }
-            
-        foreach($resultat as $re){echo $re['image'];}
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -185,17 +163,16 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="index.php" method="GET">
-                                <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
-                                </div>
-                                <input type="text" placeholder="What do yo u need?" name="terme">
-                                <input type="submit"  name="s" value="Rechercher">
+                            <!-- moteur de recherche -->
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                                <input type="text" placeholder="Que voulez vous?" name="query">
+                                <button class="site-btn" name="rechercher" value="rechercher"> Rechercher</button>
                             </form>
                         </div>
+                        
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
+                                <i class="fa fa-account"></i>
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
@@ -204,6 +181,53 @@
                             </div>
                         </div>
                     </div>
+                    <div class="selection" style="height: 360px; overflow-Y: scroll; display: hidden">
+                    <?php 
+                        if (isset($_POST['rechercher']) && isset($_POST['query']) && !empty($_POST['query'])) {
+                            
+                        $query = $_POST['query'];
+
+                        $recherche = connect()->prepare("SELECT * FROM produits WHERE libelle LIKE ?");
+                        $recherche->execute(array('%' . $query . '%'));
+                        $resultat = $recherche->fetchAll();
+
+
+                        if ($resultat) {
+                            foreach ($resultat as $re) { ?>
+                                <div class="col-lg-3 col-md-4 col-sm-6 ">
+                                    <div class="featured__item">
+                                        <div class="featured__item__pic set-bg" data-setbg="images/<?php echo $re['image']; ?>" style="background-color: blue">
+                                            <ul class="featured__item__pic__hover">
+                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="featured__item__text">
+                                            <h6><a href="#"><?php echo $re['libelle']; ?></a></h6>
+                                            <h5><?php echo $re['prix']; ?><span>  Fcfa</span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php }}else{ foreach ($resultat as $re) {?>
+                        <div class="col-lg-3 col-md-4 col-sm-6 ">
+                            <div class="featured__item">
+                                <div class="featured__item__pic set-bg" data-setbg="images/<?php echo $re['image']; ?>" style="background-color: blue">
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6><a href="#"><?php echo $re['libelle']; ?></a></h6>
+                                    <h5><?php echo $re['prix']; ?><span>  Fcfa</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                    <?php}}?>
+                    </div>
+                    
                     <div class="hero__item set-bg" data-setbg>
                         <div class="hero__text">
                             <span>A la une</span>

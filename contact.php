@@ -1,5 +1,5 @@
 <?php
-require_once 'fonction.php';
+/*require_once 'fonction.php';
 
 if(isset($_POST['envoyer'])){
 
@@ -15,8 +15,25 @@ if(isset($_POST['envoyer'])){
   }
   
    
-}
+}*/
 
+if (isset($_POST['envoyer'])) {
+  if (!empty($_POST['email'])) {
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+
+    $header = "MIME-Version: 1.0\n";
+    $header .= "From:'marius'<etoundimarius237@gmail.com>";
+    $header .= "Content-Type: text/html; charset='utf-8'";
+    $header .= "Content-Transfer-Encoding: 8bit";
+
+    mail($email, $subject, $message, $header);
+  } else {
+    die('entrez votre adresse mail');
+  }
+
+}
   
 ?>
 <!DOCTYPE html>
@@ -70,7 +87,7 @@ if(isset($_POST['envoyer'])){
         </div>
 
         <div class="form mt-5">
-          <form action="contact.php" method="post"  class="php-email-form">
+          <form action="contact.php" method="POST"  class="php-email-form">
             <div class="row">
               <div class="form-group col-md-6">
                 <input type="text" name="name" class="form-control"  placeholder="Your Name" >
