@@ -20,7 +20,7 @@
      $nb_pages = ceil($tcount[0]["cpt"]/$nb_elements_page);
      echo $nb_pages;*/
 
-     $reqprod = connect()->prepare("SELECT * FROM produits ORDER BY id DESC LIMIT $debut,$nb_elements_page");
+     $reqprod = connect()->prepare("SELECT * FROM produits WHERE favori=1 ORDER BY id DESC LIMIT $debut,$nb_elements_page");
      $reqprod->setFetchMode(PDO::FETCH_ASSOC);
      $reqprod->execute();
      $repprod = $reqprod->fetchAll();
@@ -39,23 +39,32 @@
      <main id="main">
      <section id="posts" class="posts">
         <div class="container" data-aos="fade-up">
-               <div class="row">
+               <div class="col">
                <?php foreach($repprod as $prod){ ?> <br> 
-                 <div class="col-md-3">
-                 <a><img src="images/<?php echo $prod['image']; ?>" width="270" height="270"></a><br>
-               </div>
+                <div class="row" style="border-bottom: solid 1px; max-height: 300px; overflow: auto;">
+                  <div class="col-lg">
+                    <a><img src="images/<?php echo $prod['image']; ?>" width="270" height="270"></a>
+                  </div>
+                  <div class="col-lg">
+                    <?php echo $prod['description']; ?>
+                    <div class="" style="position: absolute; bottom: 25; right: 0;">
+                    <button class="site-btn" name='achat'>Acheter</button>
+                    </div>
+                  </div>
+                  
+                </div>
                <?php } ?>
            </div> <!-- End .row -->
            <br>
           
-           <div class="row" >
+           <!--<div class="row" >
            <?php
             for ($i=1;$i<=$nb_pages;$i++){ 
               if($page!=$i){ ?>
               <a type="button" class="btn btn-block " style="background-color: rgba(0,0,0,0); color:green; border-color:green" href="?page=<?php echo $i; ?>"><?php echo $i ?></a>
               <?php }else{ ?>
               <a type="button" class="btn btn-block " style="background-color: green; color:white"><?php echo $i ?></a>
-           <?php }} ?>
+           <?php }} ?>-->
           </div>
          </div>
        </section> <!-- End Post Grid Section -->

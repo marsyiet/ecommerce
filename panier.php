@@ -1,6 +1,6 @@
 <?php
-   //session_start();
-    include("menu.php");
+   
+    include("menu.php"); 
 
      $count= connect()->prepare("SELECT count(id) AS cpt FROM produits");
      $count->setFetchMode(PDO::FETCH_ASSOC);
@@ -35,7 +35,7 @@
    </head>
    
    <body>
-    
+    <?php include("menu.php"); ?>
      <main id="main">
      <section id="posts" class="posts">
         <div class="container" data-aos="fade-up">
@@ -48,13 +48,13 @@
            </div> <!-- End .row -->
            <br>
           
-           <div class="row " style="justify-content: center;">
+           <div class="row" >
            <?php
             for ($i=1;$i<=$nb_pages;$i++){ 
               if($page!=$i){ ?>
-              <a type="button" class="site-btn" style="background-color: rgba(0,0,0,0); color:green; border-color:green" href="?page=<?php echo $i; ?>"><?php echo $i ?></a>
+              <a type="button" class="btn btn-block " style="background-color: rgba(0,0,0,0); color:green; border-color:green" href="?page=<?php echo $i; ?>"><?php echo $i ?></a>
               <?php }else{ ?>
-              <a type="button" class="site-btn" style="background-color: green; color:white"><?php echo $i ?></a>
+              <a type="button" class="btn btn-block " style="background-color: green; color:white"><?php echo $i ?></a>
            <?php }} ?>
           </div>
          </div>

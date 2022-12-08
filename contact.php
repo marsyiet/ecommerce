@@ -34,12 +34,7 @@ if (isset($_POST['envoyer'])) {
   }
 
 }
-if (mail($email, $subject, $message, $header)) {
-  echo "Email envoyé avec succès";
-} else {
-  echo "Échec de l'envoi de l'email ";
-}
-  
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
