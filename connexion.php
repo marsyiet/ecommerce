@@ -50,40 +50,26 @@
 <link rel="stylesheet" href="ogani-master/css/style.css" type="text/css">
 </head>
 <body>
-  <div class="main-panel container-fluid page-body-wrapper full-page-wrapper">        
-    <div class="content-wrapper d-flex align-items-center auth px-0">
-    <div class="row w-100 mx-0">
-    <div class="col-lg-4 mx-auto">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Connectez-vous</h4>
-        <form class="forms-sample" action="connexion.php" method="POST">
-          <div class="form-group">
-            <label for="exampleInputmail">Mail</label>
-            <input type="mail" class="form-control" id="exampleInputmail" placeholder="mail" name="mail">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
-          </div>
-          <button type="submit" class="btn btn-primary mr-2" name="connexion">Se connecter</button>
-        </form>
-      </div>
+    <div style="width: 350px; height: auto; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Connectez-vous</h4>
+                <form action="connexion.php" method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputmail">Mail</label>
+                        <input type="mail" class="form-control" id="exampleInputmail" placeholder="mail" name="mail">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2" name="connexion">Se connecter</button>
+                </form>
+            </div>
+        </div> 
     </div>
+    <div style="position: absolute; bottom: 0; width: 100%;">
+        <?php require 'admin/includes/footer.html'; ?>
     </div>
-    </div>
-    </div>
-  </div>
-  <?php include("admin/includes/footer.html"); ?>
-
-  <script src="ogani-master/js/jquery-3.3.1.min.js"></script>
-    <script src="ogani-master/js/bootstrap.min.js"></script>
-    <script src="ogani-master/js/jquery.nice-select.min.js"></script>
-    <script src="ogani-master/js/jquery-ui.min.js"></script>
-    <script src="ogani-master/js/jquery.slicknav.js"></script>
-    <script src="ogani-master/js/mixitup.min.js"></script>
-    <script src="ogani-master/js/owl.carousel.min.js"></script>
-    <script src="ogani-master/js/main.js"></script>
 </body>
 
-</html>
