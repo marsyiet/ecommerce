@@ -8,8 +8,8 @@
                 if(confirm(data.message + ' voulez vous consulter votre panier?')){
                     location.href = 'panier.php';
                 }else{
-                    $('#total').empty().append(data.total);
-                    $('#count').empty().append(data.count);
+                    $('#totalpanier').empty().append(data.total);
+                    $('#countpanier').empty().append(data.count);
                 }
             }
         },'json');
@@ -17,20 +17,4 @@
     })
 })(jQuery);
 
-(function($){
-    $('.connect').click(function(event){
-        event.preventDefault();
-        $.get($(this).attr('href'),{},function(data){  
-            if(data.error){
-                alert('vous devez vous conecter');
-            }else{
-                if(confirm('vous devez vous conecter')){
-                    location.href = 'connexion.php';
-                }else{
 
-                }
-            }
-        },'json');
-        return false;
-    })
-})(jQuery);

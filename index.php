@@ -1,9 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['id'])){
-     if(isset($_GET['add'])){
-        $panier->add($_GET['add']);
-    }
+
 ?>
 <?php require 'header.php'; ?>
     <!-- Header Section End -->
@@ -62,13 +60,13 @@ if(isset($_SESSION['id'])){
                             <div class="featured__item">
                                 <div class="featured__item__pic set-bg" data-setbg="images/<?= $re->image ?>">
                                     <ul class="featured__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <?php if (isset($_GET['add'])) { ?>
-                                            <li><i class="fa fa-check-circle-o"></i></li>
+                                        <?php if (empty($_SESSION['favori'][$re->id])) { ?>
+                                        <li><a class="add addfavori" href="addfavori.php?addfavori=<?= $re->id ?>"><i class="fa fa-heart"></i></a></li>
                                         <?php } else { ?>
-                                            <li><a class="add addpanier" href="addpanier.php?add=<?= $re->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a class=" addfavori" href="index.php?delfavori=<?= $re->id ?>"><i class="fa fa-trash"></i></a></li>
                                         <?php } ?>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a class="add addpanier" href="addpanier.php?addpanier=<?= $re->id ?>"><i class="fa fa-shopping-cart"></i></a></li> 
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
@@ -144,14 +142,14 @@ if(isset($_SESSION['id'])){
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="images/<?= $g->image ?>">
                             <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <?php if(isset($_GET['add'])){ ?>
-                                    <li><i class="fa fa-check-circle-o"></i></li>
-                                <?php }else{?>
-                                    <li><a class="add addpanier" href="addpanier.php?add=<?= $g->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
+                                <?php if (empty($_SESSION['favori'][$g->id])) { ?>
+                                <li><a class="add addfavori" href="addfavori.php?addfavori=<?= $g->id ?>"><i class="fa fa-heart"></i></a></li>
+                                <?php } else { ?>
+                                <li><a class=" addfavori" href="index.php?delfavori=<?= $g->id ?>"><i class="fa fa-trash"></i></a></li>
                                 <?php } ?>
-                            </ul>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a class="add addpanier" href="addpanier.php?addpanier=<?= $g->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
+                           </ul>
                         </div>
                         <div class="featured__item__text">
                             <h6><a href="#"><?= $g->nom ?></a></h6>
@@ -571,7 +569,7 @@ if(isset($_SESSION['id'])){
                                     <ul class="featured__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a class="connect" href="addpanier.php?add=<?= $re->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
