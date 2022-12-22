@@ -16,7 +16,7 @@ if(isset($_SESSION['id'])){
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>Cathégories</span>
                         </div>
                         <ul>
                             <?php $cathegorie = $DB->query("SELECT * FROM cathegories ORDER BY id DESC");?>
@@ -29,12 +29,14 @@ if(isset($_SESSION['id'])){
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
+                            
+                            
                             <form action="index.php" method="POST">
                                 <div class="hero__search__categories">
                                     RECHERCHER
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="Que voulez vous?">
+                                <input type="text" placeholder="Que voulez vous?" name="element">
                                 <button type="submit" class="site-btn" name="recherche">SEARCH</button>
                             </form>
                         </div>
@@ -48,6 +50,36 @@ if(isset($_SESSION['id'])){
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                    <?php 
+                        if(isset($_POST['recherche']) && isset($_POST['element']) && !empty($_POST['element'])){
+                        $element = $_POST['element'];
+                        $resultat = $DB->query('SELECT * FROM produits WHERE nom LIKE ?', array('%'.$element.'%'));    
+                            if ($resultat) {
+                                foreach ($resultat as $re):
+                    ?>
+                        <div class=" col-md-4">
+                            <div class="featured__item">
+                                <div class="featured__item__pic set-bg" data-setbg="images/<?= $re->image ?>">
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <?php if (isset($_GET['add'])) { ?>
+                                            <li><i class="fa fa-check-circle-o"></i></li>
+                                        <?php } else { ?>
+                                            <li><a class="add addpanier" href="addpanier.php?add=<?= $re->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6><a href="#"><?= $re->nom ?></a></h6>
+                                    <h5><?= number_format($re->prix, 0, '.', ' '); ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach ?>
+                    </div>
+                    <?php }}else{ ?>
                     <?php $alaune = $DB->query("SELECT * FROM produits, cathegories WHERE alaune=1 AND cathegories.id = produits.cathegorie"); ?>
                     <?php foreach ($alaune as $une): ?>
                     <div class="hero__item set-bg" data-setbg="">
@@ -60,6 +92,7 @@ if(isset($_SESSION['id'])){
                         <img src="images/<?= $une->image ?>">
                     </div>
                     <?php endforeach ?>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -116,7 +149,7 @@ if(isset($_SESSION['id'])){
                                 <?php if(isset($_GET['add'])){ ?>
                                     <li><i class="fa fa-check-circle-o"></i></li>
                                 <?php }else{?>
-                                    <li><a href="addpanier.php?add=<?= $g->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a class="add addpanier" href="addpanier.php?add=<?= $g->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
                                 <?php } ?>
                             </ul>
                         </div>
@@ -503,12 +536,14 @@ if(isset($_SESSION['id'])){
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
+                            
+                            
                             <form action="index.php" method="POST">
                                 <div class="hero__search__categories">
                                     RECHERCHER
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="Que voulez vous?">
+                                <input type="text" placeholder="Que voulez vous?" name="element">
                                 <button type="submit" class="site-btn" name="recherche">SEARCH</button>
                             </form>
                         </div>
@@ -522,6 +557,32 @@ if(isset($_SESSION['id'])){
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                    <?php 
+                        if(isset($_POST['recherche']) && isset($_POST['element']) && !empty($_POST['element'])){
+                        $element = $_POST['element'];
+                        $resultat = $DB->query('SELECT * FROM produits WHERE nom LIKE ?', array('%'.$element.'%'));    
+                            if ($resultat) {
+                                foreach ($resultat as $re):
+                    ?>
+                        <div class=" col-md-4">
+                            <div class="featured__item">
+                                <div class="featured__item__pic set-bg" data-setbg="images/<?= $re->image ?>">
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a class="connect" href="addpanier.php?add=<?= $re->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6><a href="#"><?= $re->nom ?></a></h6>
+                                    <h5><?= number_format($re->prix, 0, '.', ' '); ?></h5>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach ?>
+                    </div>
+                    <?php }}else{ ?>
                     <?php $alaune = $DB->query("SELECT * FROM produits, cathegories WHERE alaune=1 AND cathegories.id = produits.cathegorie"); ?>
                     <?php foreach ($alaune as $une): ?>
                     <div class="hero__item set-bg" data-setbg="">
@@ -534,6 +595,7 @@ if(isset($_SESSION['id'])){
                         <img src="images/<?= $une->image ?>">
                     </div>
                     <?php endforeach ?>
+                    <?php } ?>
                 </div>
             </div>
         </div>

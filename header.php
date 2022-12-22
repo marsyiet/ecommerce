@@ -26,9 +26,7 @@
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+    
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -140,9 +138,9 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="panier.php"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="panier.php"><i class="fa fa-shopping-bag"></i> <span id="count"><?= $panier->count() ?></span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">item: <span id="total"><?= number_format($panier->total(),2,',',' '); ?></span></div>
                     </div>
                 </div>
             </div>
