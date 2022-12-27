@@ -48,24 +48,11 @@ if(isset($_SESSION['id'])){
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                    <?php 
+                    <div class="row"">
+                    <?php                  
                         if(isset($_POST['recherche']) && isset($_POST['element']) && !empty($_POST['element'])){
-                            $connect = new PDO('mysql:host=localhost;dbname=ecommerce','root', ''); 
-
-                            $count= $connect->prepare("SELECT count(id) AS cpt FROM produits");
-                            $count->setFetchMode(PDO::FETCH_ASSOC);
-                            $count->execute();
-                            $tcount=$count->fetchAll();
-                       
-                            @$page=$_GET["page"];
-                            if(empty($page)) $page=1;
-                            $nb_elements_page=3;
-                            $nb_pages=ceil($tcount[0]["cpt"]/$nb_elements_page);
-                            $debut=($page-1) * $nb_elements_page;
-                            
                             $element = $_POST['element'];
-                            $resultat = $DB->query("SELECT * FROM produits  WHERE nom LIKE ? ORDER BY id DESC LIMIT $debut,$nb_elements_page",array('%'.$element.'%'));    
+                            $resultat = $DB->query("SELECT * FROM produits  WHERE nom LIKE ? ORDER BY id DESC",array('%'.$element.'%'));    
                             if ($resultat) {
                                 foreach ($resultat as $re):
                     ?>
@@ -89,17 +76,6 @@ if(isset($_SESSION['id'])){
                             </div>
                         </div>
                     <?php endforeach ?>
-                    </div>
-                    <div class="row">
-                        <div style="position: absolute; left: 50%; transform: translate(-50%, -50%);">
-                            <?php
-                                for ($i=1;$i<=$nb_pages;$i++){ 
-                                if($page!=$i){ ?>
-                                <a type="button" class="site-btn" style="background-color: rgba(0,0,0,0); color:green; border-color:green" href="?page=<?php echo $i; ?>"><?php echo $i ?></a>
-                                <?php }else{ ?>
-                                <a type="button" class="site-btn" style="background-color: green; color:white"><?php echo $i ?></a>
-                            <?php }} ?>
-                        </div>
                     </div>
                     <?php }}else{ ?>
                     <?php $alaune = $DB->query("SELECT * FROM produits, cathegories WHERE alaune=1 AND cathegories.id = produits.cathegorie"); ?>
