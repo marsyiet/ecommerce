@@ -65,7 +65,7 @@ if(isset($_SESSION['id'])){
                             $debut=($page-1) * $nb_elements_page;
                             
                             $element = $_POST['element'];
-                            $resultat = $DB->query("SELECT * FROM produits ORDER BY id DESC LIMIT $debut,$nb_elements_page WHERE nom LIKE ?", array('%'.$element.'%'));    
+                            $resultat = $DB->query("SELECT * FROM produits  WHERE nom LIKE ? ORDER BY id DESC LIMIT $debut,$nb_elements_page",array('%'.$element.'%'));    
                             if ($resultat) {
                                 foreach ($resultat as $re):
                     ?>
@@ -89,6 +89,7 @@ if(isset($_SESSION['id'])){
                             </div>
                         </div>
                     <?php endforeach ?>
+                    </div>
                     <div class="row">
                         <div style="position: absolute; left: 50%; transform: translate(-50%, -50%);">
                             <?php
@@ -99,7 +100,6 @@ if(isset($_SESSION['id'])){
                                 <a type="button" class="site-btn" style="background-color: green; color:white"><?php echo $i ?></a>
                             <?php }} ?>
                         </div>
-                    </div>
                     </div>
                     <?php }}else{ ?>
                     <?php $alaune = $DB->query("SELECT * FROM produits, cathegories WHERE alaune=1 AND cathegories.id = produits.cathegorie"); ?>
