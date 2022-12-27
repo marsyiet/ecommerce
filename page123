@@ -2,6 +2,8 @@
    session_start();
 include("admin/includes/connexion.php");
 
+$connect = new PDO('mysql:host=localhost;dbname=ecommerce','root', ''); 
+
      $count= connect()->prepare("SELECT count(id) AS cpt FROM produits");
      $count->setFetchMode(PDO::FETCH_ASSOC);
      $count->execute();

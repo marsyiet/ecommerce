@@ -51,8 +51,21 @@ if(isset($_SESSION['id'])){
                     <div class="row">
                     <?php 
                         if(isset($_POST['recherche']) && isset($_POST['element']) && !empty($_POST['element'])){
-                        $element = $_POST['element'];
-                        $resultat = $DB->query('SELECT * FROM produits WHERE nom LIKE ?', array('%'.$element.'%'));    
+                            $connect = new PDO('mysql:host=localhost;dbname=ecommerce','root', ''); 
+
+                            $count= $connect->prepare("SELECT count(id) AS cpt FROM produits");
+                            $count->setFetchMode(PDO::FETCH_ASSOC);
+                            $count->execute();
+                            $tcount=$count->fetchAll();
+                       
+                            @$page=$_GET["page"];
+                            if(empty($page)) $page=1;
+                            $nb_elements_page=3;
+                            $nb_pages=ceil($tcount[0]["cpt"]/$nb_elements_page);
+                            $debut=($page-1) * $nb_elements_page;
+                            
+                            $element = $_POST['element'];
+                            $resultat = $DB->query("SELECT * FROM produits ORDER BY id DESC LIMIT $debut,$nb_elements_page WHERE nom LIKE ?", array('%'.$element.'%'));    
                             if ($resultat) {
                                 foreach ($resultat as $re):
                     ?>
@@ -61,11 +74,11 @@ if(isset($_SESSION['id'])){
                                 <div class="featured__item__pic set-bg" data-setbg="images/<?= $re->image ?>">
                                     <ul class="featured__item__pic__hover">
                                         <?php if (empty($_SESSION['favori'][$re->id])) { ?>
-                                        <li><a class="add addfavori" href="addfavori.php?addfavori=<?= $re->id ?>"><i class="fa fa-heart"></i></a></li>
+                                        <li><a class="add addfavori" href="index.php?addfavori=<?= $re->id ?>"><i class="fa fa-heart"></i></a></li>
                                         <?php } else { ?>
                                         <li><a class=" addfavori" href="index.php?delfavori=<?= $re->id ?>"><i class="fa fa-trash"></i></a></li>
                                         <?php } ?>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-thumbs-up"></i></a></li>
                                         <li><a class="add addpanier" href="addpanier.php?addpanier=<?= $re->id ?>"><i class="fa fa-shopping-cart"></i></a></li> 
                                     </ul>
                                 </div>
@@ -76,6 +89,17 @@ if(isset($_SESSION['id'])){
                             </div>
                         </div>
                     <?php endforeach ?>
+                    <div class="row">
+                        <div style="position: absolute; left: 50%; transform: translate(-50%, -50%);">
+                            <?php
+                                for ($i=1;$i<=$nb_pages;$i++){ 
+                                if($page!=$i){ ?>
+                                <a type="button" class="site-btn" style="background-color: rgba(0,0,0,0); color:green; border-color:green" href="?page=<?php echo $i; ?>"><?php echo $i ?></a>
+                                <?php }else{ ?>
+                                <a type="button" class="site-btn" style="background-color: green; color:white"><?php echo $i ?></a>
+                            <?php }} ?>
+                        </div>
+                    </div>
                     </div>
                     <?php }}else{ ?>
                     <?php $alaune = $DB->query("SELECT * FROM produits, cathegories WHERE alaune=1 AND cathegories.id = produits.cathegorie"); ?>
@@ -136,28 +160,66 @@ if(isset($_SESSION['id'])){
                 </div>
             </div>
             <div class="row featured__filter">
-                <?php $mixe = $DB->query("SELECT * FROM produits"); ?>
+                <?php
+                $connect = new PDO('mysql:host=localhost;dbname=ecommerce','root', ''); 
+
+                $count= $connect->prepare("SELECT count(id) AS cpt FROM produits");
+                $count->setFetchMode(PDO::FETCH_ASSOC);
+                $count->execute();
+                $tcount=$count->fetchAll();
+           
+                @$page=$_GET["page"];
+                if(empty($page)) $page=1;
+                $nb_elements_page=8;
+                $nb_pages=ceil($tcount[0]["cpt"]/$nb_elements_page);
+                $debut=($page-1) * $nb_elements_page;
+           
+                $mixe = $DB->query("SELECT * FROM produits ORDER BY id DESC LIMIT $debut,$nb_elements_page"); ?>
                 <?php foreach ($mixe as $g): ?>
                 <div class="col-lg-3 col-md-4 col-sm-6 mix ">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="images/<?= $g->image ?>">
                             <ul class="featured__item__pic__hover">
                                 <?php if (empty($_SESSION['favori'][$g->id])) { ?>
-                                <li><a class="add addfavori" href="addfavori.php?addfavori=<?= $g->id ?>"><i class="fa fa-heart"></i></a></li>
+                                <li><a class="add addfavori" href="index.php?addfavori=<?= $g->id ?>"><i class="fa fa-heart"></i></a></li>
                                 <?php } else { ?>
-                                <li><a class=" addfavori" href="index.php?delfavori=<?= $g->id ?>"><i class="fa fa-trash"></i></a></li>
+                                <li><a class="" href="index.php?delfavori=<?= $g->id ?>"><i class="fa fa-trash"></i></a></li>
                                 <?php } ?>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="addlike.php?t=1&id=<?= $g->id ?>"><i class="fa fa-thumbs-up"></i></a></li>
                                 <li><a class="add addpanier" href="addpanier.php?addpanier=<?= $g->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
                            </ul>
                         </div>
                         <div class="featured__item__text">
                             <h6><a href="#"><?= $g->nom ?></a></h6>
-                            <h5><?= number_format($g->prix, 0, '.', ' '); ?></h5>
+                            <h5><?= number_format($g->prix, 0, '.', ' '); ?></h5><br />
+                            <?php
+                                $connect = new PDO('mysql:host=localhost;dbname=ecommerce','root', '');
+                                $likes = $connect->prepare("SELECT id FROM likes WHERE id_produit = ?");
+                                $likes->execute(array($g->id));
+                                $likes = $likes->rowCount();
+
+                                $connect = new PDO('mysql:host=localhost;dbname=ecommerce','root', '');
+                                $dislikes = $connect->prepare("SELECT id FROM dislikes WHERE id_produit = ?");
+                                $dislikes->execute(array($g->id));
+                                $dislikes = $dislikes->rowCount();
+                            ?>
+                            <h6><a href="addlike.php?t=1&id=<?= $g->id ?>">j'aime</a>(<?= $likes ?>)</h6>
+                            <h6><a href="addlike.php?t=2&id=<?= $g->id ?>">j'aime pas</a>(<?= $dislikes ?>)</h6>
                         </div>
                     </div>
                 </div>
                 <?php endforeach ?>
+            </div>
+            <div class="row">
+                <div style="position: absolute; left: 50%; transform: translate(-50%, -50%);">
+                    <?php
+                        for ($i=1;$i<=$nb_pages;$i++){ 
+                        if($page!=$i){ ?>
+                        <a type="button" class="site-btn" style="background-color: rgba(0,0,0,0); color:green; border-color:green" href="?page=<?php echo $i; ?>"><?php echo $i ?></a>
+                        <?php }else{ ?>
+                        <a type="button" class="site-btn" style="background-color: green; color:white"><?php echo $i ?></a>
+                    <?php }} ?>
+                </div>
             </div>
         </div>
     </section>
@@ -223,65 +285,35 @@ if(isset($_SESSION['id'])){
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>Top Rated Products</h4>
+                        <h4>produits les plus likés</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
+                                <?php $lik = $DB->query("SELECT * FROM likes, produits WHERE likes.id_produit = produits.id ORDER BY likes.id DESC LIMIT 4"); ?>
+                                <?php foreach ($lik as $l): ?>
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
+                                        <img src="images/<?= $l->image ?>" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6><?= $l->nom ?></h6>
+                                        <span><?= $l->prix ?></span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                <?php endforeach?>
                             </div>
                             <div class="latest-prdouct__slider__item">
+                                <?php $lik = $DB->query("SELECT * FROM likes, produits WHERE likes.id_produit = produits.id ORDER BY likes.id ASC LIMIT 4"); ?>
+                                <?php foreach ($lik as $l): ?>
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
+                                        <img src="images/<?= $l->image ?>" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6><?= $l->nom ?></h6>
+                                        <span><?= $l->prix ?></span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                <?php endforeach?>
                             </div>
                         </div>
                     </div>
@@ -418,7 +450,6 @@ if(isset($_SESSION['id'])){
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="./index.html">Accueil</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
                 <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Soldes</a></li>
@@ -494,8 +525,6 @@ if(isset($_SESSION['id'])){
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="./index.html">Accueil</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shoping-cart.html">Soldes</a></li>
                                     <li><a href="./checkout.html">informations</a></li>
@@ -521,7 +550,7 @@ if(isset($_SESSION['id'])){
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>Cathégories</span>
                         </div>
                         <ul>
                             <?php $cathegorie = $DB->query("SELECT * FROM cathegories ORDER BY id DESC");?>
@@ -722,65 +751,35 @@ if(isset($_SESSION['id'])){
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>Top Rated Products</h4>
+                        <h4>produits les plus likés</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
+                                <?php $lik = $DB->query("SELECT * FROM likes, produits WHERE likes.id_produit = produits.id ORDER BY likes.id DESC LIMIT 4"); ?>
+                                <?php foreach ($lik as $l): ?>
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
+                                        <img src="images/<?= $l->image ?>" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6><?= $l->nom ?></h6>
+                                        <span><?= $l->prix ?></span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                <?php endforeach?>
                             </div>
                             <div class="latest-prdouct__slider__item">
+                                <?php $lik = $DB->query("SELECT * FROM likes, produits WHERE likes.id_produit = produits.id ORDER BY likes.id ASC LIMIT 4"); ?>
+                                <?php foreach ($lik as $l): ?>
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-1.jpg" alt="">
+                                        <img src="images/<?= $l->image ?>" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6><?= $l->nom ?></h6>
+                                        <span><?= $l->prix ?></span>
                                     </div>
                                 </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
+                                <?php endforeach?>
                             </div>
                         </div>
                     </div>

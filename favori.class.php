@@ -13,7 +13,10 @@
         $this->DB = $DB; 
         if(isset($_GET['delfavori'])){
             $this->del($_GET['delfavori']);
-        }   
+        }
+        if(isset($_GET['addfavori'])){
+            $this->add($_GET['addfavori']);
+        }    
     }
 
     public function total()
