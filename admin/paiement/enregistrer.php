@@ -12,7 +12,7 @@
       else{
         $reqpaie = connect()->prepare("INSERT INTO paiements(libelle) VALUES(?)");
         $reqpaie->execute(array($paiement));
-        if($requete){
+        if($reqpaie){
           echo "ok";
           header("Location:enregistrer.php");
         }

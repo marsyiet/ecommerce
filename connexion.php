@@ -33,24 +33,8 @@
    
    
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
-<!-- Css Styles -->
-<link rel="stylesheet" href="ogani-master/css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="ogani-master/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="ogani-master/css/elegant-icons.css" type="text/css">
-<link rel="stylesheet" href="ogani-master/css/nice-select.css" type="text/css">
-<link rel="stylesheet" href="ogani-master/css/jquery-ui.min.css" type="text/css">
-<link rel="stylesheet" href="ogani-master/css/owl.carousel.min.css" type="text/css">
-<link rel="stylesheet" href="ogani-master/css/slicknav.min.css" type="text/css">
-<link rel="stylesheet" href="ogani-master/css/style.css" type="text/css">
-</head>
-<body>
-    <div style="width: 350px; height: auto; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+<?php require 'header_non_connexion.php'; ?>
+<div class="col-lg-4 mx-auto" style="margin: 2%">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Connectez-vous</h4>
@@ -68,8 +52,6 @@
             </div>
         </div> 
     </div>
-    <div style="position: absolute; bottom: 0; width: 100%;">
-        <?php require 'admin/includes/footer.html'; ?>
-    </div>
-</body>
+    
+<?php require 'footer.php'; ?>
 

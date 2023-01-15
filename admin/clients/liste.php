@@ -2,7 +2,7 @@
 
 include("../includes/connexion.php");
     
-  $requete = connect()->prepare("SELECT * FROM clients"); 
+  $requete = connect()->prepare("SELECT * FROM clients, villes, quartiers WHERE clients.ville = villes.id AND clients.quartier = quartiers.id"); 
   $requete->execute();
   $client = $requete->fetchAll();
    
@@ -52,8 +52,8 @@ include("../includes/connexion.php");
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $cli['nom']; ?></td>
                                 <td><?php echo $cli['mail']; ?></td>
-                                <td><?php echo $cli['ville']; ?></td>
-                                <td><?php echo $cli['quartier']; ?></td>
+                                <td><?php echo $cli['nomVille']; ?></td>
+                                <td><?php echo $cli['nomQuartier']; ?></td>
                                 <td>
                                     <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $cli['id']; ?>">
                                         <i class="typcn typcn-edit"></i>

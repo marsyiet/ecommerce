@@ -1,32 +1,17 @@
-<?php
-   session_start();
-include("admin/includes/connexion.php");
+(function($){
+    $('.addpanier').click(function(event){
+        event.preventDefault();
+        $.get($(this).attr('href'),{},function(data){  
+            if(data.error){
+                alert(data.message);
+            }else{
+                $('#totalpanier').empty().append(data.total);
+                $('#countpanier').empty().append(data.count);
+                localStorage.setItem("products", JSON.stringify(data));                
+            }
+        },'json');
+        return false;
+    })
+})(jQuery);
 
-$connect = new PDO('mysql:host=localhost;dbname=ecommerce','root', ''); 
-
-     $count= connect()->prepare("SELECT count(id) AS cpt FROM produits");
-     $count->setFetchMode(PDO::FETCH_ASSOC);
-     $count->execute();
-     $tcount=$count->fetchAll();
-
-     @$page=$_GET["page"];
-     if(empty($page)) $page=1;
-     $nb_elements_page=4;
-     $nb_pages=ceil($tcount[0]["cpt"]/$nb_elements_page);
-     $debut=($page-1) * $nb_elements_page;
-
-     $reqprod = connect()->prepare("SELECT * FROM produits WHERE favori=1 ORDER BY id DESC LIMIT $debut,$nb_elements_page");
-     $reqprod->setFetchMode(PDO::FETCH_ASSOC);
-     $reqprod->execute();
-     $repprod = $reqprod->fetchAll();
-     
-     ?>
-
-
-            <?php
-                    for ($i=1;$i<=$nb_pages;$i++){ 
-                    if($page!=$i){ ?>
-                    <a type="button" class="btn btn-block " style="background-color: rgba(0,0,0,0); color:green; border-color:green" href="?page=<?php echo $i; ?>"><?php echo $i ?></a>
-                    <?php }else{ ?>
-                    <a type="button" class="btn btn-block " style="background-color: green; color:white"><?php echo $i ?></a>
-                <?php }} ?>
+}

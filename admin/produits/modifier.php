@@ -1,5 +1,4 @@
 <?php
-
   $id = $_GET['id'];
   include("../includes/connexion.php");
 
@@ -12,14 +11,13 @@
   $repfour = $reqfour->fetchAll();
 
   try{
-    
-    $reqprod = connect()->prepare("SELECT * FROM produits WHERE id= ?"); 
-    $reqprod->execute(array($id));
-    $repprod = $reqprod->fetchAll();
+        $reqprod = connect()->prepare("SELECT * FROM produits WHERE id= ?"); 
+        $reqprod->execute(array($id));
+        $repprod = $reqprod->fetchAll();
 
    if (isset($_POST['modifier'])){
-
-      $libelle = $_POST['libelle'];
+      $image = $_POST['image'];
+      $nom = $_POST['nom'];
       $cathegorie = $_POST['cathegorie'];
       $fournisseur = $_POST['fournisseur'];
       $date = $_POST['date'];
@@ -29,14 +27,15 @@
       $error = "";
    
         
-      if(empty($login)){ 
+      if(empty($nom) && empty($fournisseur) && empty($cathegorie) && empty($qte)){ 
         $error = "Veuillez remplir tous les champs"; 
-        echo "error";
+        echo $error;
       }
       else{
-        $requete = connect()->prepare("UPDATE produits SET  libelle = :libelle, prix = :prix, cathegorie = :cathegorie, fournisseur = :fournisseur, date = :date, qte = :qte  WHERE id = :id1");
+        $requete = connect()->prepare("UPDATE produits SET  image= :image, nom = :nom, prix = :prix, cathegorie = :cathegorie, fournisseur = :fournisseur, date = :date, qte = :qte  WHERE id = :id1");
         $requete->execute(array(
-        'libelle' => $libelle,
+        'image' => $image,
+        'nom' => $nom,
         'prix' => $prix,
         'cathegorie' => $cathegorie,
         'fournisseur' => $fournisseur,
@@ -44,8 +43,9 @@
         'qte' => $qte,
         'id1' => $id1 ));
 
+        
+
         if($requete){
-          echo "inscription ok";
           header("Location: liste.php");
         }
               
@@ -83,8 +83,12 @@
                   <input type="hidden" class="form-control" id="exampleInputnom" value="<?php foreach($repprod as $prod){ echo $prod['id'];}?>" name="id">
                 </div>
                 <div class="form-group">
+                  <label for="exampleInputnom">image</label>
+                  <input type="file" class="form-control" id="exampleInputnom" value="<?php foreach($repprod as $prod){ echo $prod['image'];}?>" name="image">
+                </div>
+                <div class="form-group">
                   <label for="exampleInputnom">Libellé</label>
-                  <input type="text" class="form-control" id="exampleInputnom" value="<?php foreach($repprod as $prod){ echo $prod['libelle'];}?>" name="libelle">
+                  <input type="text" class="form-control" id="exampleInputnom" value="<?php foreach($repprod as $prod){ echo $prod['nom'];}?>" name="nom">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputqte">Prix</label>

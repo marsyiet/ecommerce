@@ -2,7 +2,7 @@
 
 include("../includes/connexion.php");
     
-  $requete = connect()->prepare("SELECT * FROM livreurs"); 
+  $requete = connect()->prepare("SELECT * FROM livreurs, quartiers, villes WHERE livreurs.ville = villes.id AND livreurs.quartier = quartiers.id"); 
   $requete->execute();
   $livreur = $requete->fetchAll();
    
@@ -39,21 +39,13 @@ include("../includes/connexion.php");
                             </thead>
                             <tbody>
                               <?php $i = 1;
-                              foreach($livreur as $liv){ 
-                                $reqvil = connect()->prepare("SELECT * FROM villes");
-                                $reqvil->execute();
-                                $vil = $reqvil->fetchAll();
-                                
-                                $reqquar = connect()->prepare("SELECT * FROM quartiers");
-                                $reqquar->execute();
-                                $quar = $reqvil->fetchAll();
-                                ?>
+                              foreach($livreur as $liv){ ?>
                               <tr>
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $liv['nom']; ?></td>
                                 <td><?php echo $liv['mail']; ?></td>
-                                <td><?php echo $liv['ville']; ?></td>
-                                <td><?php echo $liv['quartier']; ?></td>
+                                <td><?php echo $liv['nomVille']; ?></td>
+                                <td><?php echo $liv['nomQuartier']; ?></td>
                                 <td>
                                     <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $liv['id']; ?>">
                                         <i class="typcn typcn-edit"></i>

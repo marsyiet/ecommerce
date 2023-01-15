@@ -1,0 +1,16 @@
+[
+{
+    "id":1,
+    "image": "images/banane.jpg",
+    "price": "2500",
+    "quantity": 1
+},
+
+{
+    "id":2,
+    "image": "images/pomme.jpg",
+    "price": "5000",
+    "quantity": 1
+}
+
+]

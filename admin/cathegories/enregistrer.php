@@ -1,4 +1,5 @@
-<?php 
+<?php
+require '../includes/connexion.php';
     if (isset($_POST['enregistrer']))
     {
       $cathegorie = $_POST['cathegorie']; 
@@ -8,7 +9,6 @@
         echo $error;
       }
       else{
-        include("../includes/connexion.php");
         $requete = connect()->prepare("INSERT INTO cathegories(libelle) VALUES(?)");
         $requete->execute(array($cathegorie));
         //var_dump($requete);die();

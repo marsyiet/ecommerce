@@ -2,7 +2,7 @@
 
 include("../includes/connexion.php");
     
-  $requete = connect()->prepare("SELECT * FROM fournisseurs"); 
+  $requete = connect()->prepare("SELECT * FROM fournisseurs, villes, quartiers WHERE fournisseurs.ville = villes.id AND fournisseurs.quartier = quartiers.id"); 
   $requete->execute();
   $fournisseur = $requete->fetchAll();
    
@@ -52,8 +52,8 @@ include("../includes/connexion.php");
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $four['nom']; ?></td>
                                 <td><?php echo $four['mail']; ?></td>
-                                <td><?php echo $four['ville']; ?></td>
-                                <td><?php echo $four['quartier']; ?></td>
+                                <td><?php echo $four['nomVille']; ?></td>
+                                <td><?php echo $four['nomQuartier']; ?></td>
                                 <td>
                                     <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $four['id']; ?>">
                                         <i class="typcn typcn-edit"></i>

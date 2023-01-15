@@ -10,7 +10,7 @@
       }
       else{
         
-        $reqquar = connect()->prepare("INSERT INTO quartiers(nom) VALUES(?)");
+        $reqquar = connect()->prepare("INSERT INTO quartiers(nomQuartier) VALUES(?)");
         $reqquar->execute(array($quartier));
         if($reqquar){
           header("Location:enregistrer.php");

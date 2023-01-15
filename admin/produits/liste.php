@@ -2,7 +2,7 @@
 
 include("../includes/connexion.php");
     
-  $requete = connect()->prepare("SELECT * FROM produits"); 
+  $requete = connect()->prepare("SELECT * FROM cathegories, produits WHERE produits.cathegorie = cathegories.id"); 
   $requete->execute();
   $produit = $requete->fetchAll();
   
@@ -40,17 +40,13 @@ include("../includes/connexion.php");
                             </thead>
                             <tbody>
                               <?php $i = 1;
-                              foreach($produit as $prod){ 
-                                $reqcat = connect()->prepare("SELECT * FROM cathegorie");
-                                $reqcat->execute();
-                                $cat = $reqcat->fetchAll();
-                                
+                              foreach($produit as $prod){                                 
                                 ?>
                               <tr>
                                 <td><?php echo $i; ?></td>
-                                <td><?php echo $prod['libelle']; ?></td>
+                                <td><?php echo $prod['nom']; ?></td>
                                 <td><?php echo $prod['prix']; ?></td>
-                                <td><?php echo $prod['cathegorie']; ?></td>
+                                <td><?php echo $prod['libelle']; ?></td>
                                 <td><?php echo $prod['date']; ?></td>
                                 <td><?php echo $prod['qte']; ?></td>
                                 <td>

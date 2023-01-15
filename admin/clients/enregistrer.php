@@ -1,42 +1,37 @@
 <?php 
-  
-  include("../includes/connexion.php");
+include("../includes/connexion.php");
+  $reqquar = connect()->prepare("SELECT * FROM quartiers");
+  $reqquar->execute();
+  $repquar = $reqquar->fetchAll();
 
-  $requete1 = connect()->prepare("SELECT * FROM villes WHERE etat = 0");
-  $requete1->execute();
-  $reponse1 = $requete1->fetchAll();
-
-  $requete2 = connect()->prepare("SELECT * FROM quartiers WHERE etat = 0");
-  $requete2->execute();
-  $reponse2 = $requete2->fetchAll();
+  $reqvil = connect()->prepare("SELECT * FROM villes");
+  $reqvil->execute();
+  $repvil = $reqvil->fetchAll();
 
   if (isset($_POST['enregistrer']))
   {
-    
+  $image = $_POST['image'];
     $nom = $_POST['nom'];
     $mail = $_POST['mail'];
     $ville = $_POST['ville']; 
     $quartier = $_POST['quartier']; 
 
     if(empty($nom)){
-      $error = "Veuillez entrer votre login"; 
-      echo $error;
-    }
-    elseif(empty($mail)){ 
-      $error = "Veuillez entrer votre mail"; 
+      $error = "Veuillez entrer le nom"; 
       echo $error;
     }
     elseif(empty($ville)){ 
-      $error = "Veuillez entrer votre mot de passe"; 
+      $error = "Veuillez choisir une ville"; 
       echo $error;
     }
     elseif(empty($quartier)){ 
-      $error = "Veuillez entrer votre mot de passe"; 
+      $error = "Veuillez choisir un quartier"; 
       echo $error;
     }
     else{
-      $requete = connect()->prepare("INSERT INTO clients(nom,mail,ville,quartier) VALUES(?,?,?,?)");
-      $requete->execute(array($nom,$mail,$ville,$quartier));
+      
+      $requete = connect()->prepare("INSERT INTO fournisseurs(image,nom,mail,ville,quartier) VALUES(?,?,?,?,?)");
+      $requete->execute(array($image,$nom,$mail,$ville,$quartier));
       if($requete){
         header("Location:enregistrer.php");
       }
@@ -65,6 +60,10 @@
               <h4 class="card-title text-center">Enregistrer un client</h4>
               <form class="forms-sample" action="enregistrer.php" method="POST">
                 <div class="form-group">
+                  <label for="exampleInputnim">image</label>
+                  <input type="file" class="form-control" id="exampleInputim"  name="image">
+                </div>
+                <div class="form-group">
                   <label for="exampleInputnom">Nom du client</label>
                   <input type="text" class="form-control" id="exampleInputnom" placeholder="Nom" name="nom">
                 </div>
@@ -74,16 +73,20 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputVille">Ville</label>
-                  <select class="js-example-basic-single w-100" name="ville" style="color:black">
-                    <?php foreach($reponse1 as $rep1){ ?>
-                    <option value="<?php echo $rep1['id']; ?>" ><?php echo $rep1['nom']; ?></option><?php } ?>
+                  <select class="form-control" id="exampleville" name="ville">
+                    <option value="">--</option>
+                    <?php foreach($repvil as $repv){ ?>
+                    <option value ="<?php echo $repv['id'] ?>"><?php echo $repv['nomVille']; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputQuartier">Quartier</label>
-                  <select class="js-example-basic-single w-100" name="quartier" style="color:black">
-                    <?php foreach($reponse2 as $rep2){ ?>
-                    <option value="<?php echo $rep2['id']; ?>" ><?php echo $rep2['nom']; ?></option><?php } ?>
+                  <select class="form-control" id="examplequartier" name="quartier">
+                    <option value="">--</option>
+                    <?php foreach($repquar as $repq){ ?>
+                    <option value="<?php echo $repq['id'] ?>"><?php echo $repq['nomQuartier']; ?></option>
+                    <?php } ?>
                   </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2" name="enregistrer">Enregistrer</button>
@@ -100,4 +103,5 @@
 </body>
 
 </html>
+
 

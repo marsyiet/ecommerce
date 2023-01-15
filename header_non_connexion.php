@@ -22,15 +22,13 @@
     <link rel="stylesheet" href="ogani-master/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="ogani-master/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="ogani-master/css/style.css" type="text/css">
-    <link rel="stylesheet" href="style.css" type="text/css">
-
 </head>
 
 <body>
-    <!-- Page Preloder 
+    <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
-    </div>-->
+    </div>
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -41,24 +39,26 @@
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <img src="img/language.png" alt="">
-                <div>Francais</div>
+                <div>English</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
                     <li><a href="#">Francais</a></li>
+                    <li><a href="#">English</a></li>
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="deconnexion.php"><i class="fa fa-user"></i> Déconnexion</a>
+                <a href="connexion.php"><i class="fa fa-user"></i> Se connecter</a>
+                <a href="inscription.php"><i class="fa fa-user"></i> S'inscrire</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="index.php">Accueil</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
+                <li class="active"><a href="./index.html">Accueil</a></li>
+                <li><a href="grille.php">Grille de produits</a></li>
+                <li><a href="#">Commandes</a>
                     <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Soldes</a></li>
-                        <li><a href="./shoping-cart.html">Informations</a></li>
+                        <li><a href="#">Vers le panier</a></li>
+                        <li><a href="#">Commander</a></li>
                     </ul>
                 </li>
                 <li><a href="contact.php">Contact</a></li>
@@ -94,18 +94,24 @@
                             <div class="header__top__right__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
                                 <img src="img/language.png" alt="">
-                                <div>Francais</div>
+                                <div>English</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
                                     <li><a href="#">Francais</a></li>
+                                    <li><a href="#">English</a></li>
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="deconnexion.php"><i class="fa fa-sign-out"></i> Déconnexion</a>
+                                <a href="connexion.php"><i class="fa fa-user"></i> Me connecter</a>
+                            </div>
+                            <span> ¦ </span>
+                            <div class="header__top__right__auth">
+                                <a href="inscription.php"><i class="fa fa-sign-in"></i> inscription</a>
                             </div>
                         </div>
                     </div>
@@ -126,8 +132,8 @@
                             <li><a href="grille.php">Grille de prduits</a></li>
                             <li><a href="#">Commandes</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="panier.php">Vers le panier</a></li>
-                                    <li><a href="commande.php">Commander</a></li>
+                                    <li><a href="#">Vers le panier</a></li>
+                                    <li><a href="#">Commander</a></li>
                                 </ul>
                             </li>
                             <li><a href="contact.php">Contact</a></li>
@@ -138,9 +144,9 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span id="countfavori">0</span></a></li>
-                            <li><a href="panier.php"><i class="fa fa-shopping-bag"></i> <span class="countpanier"></span></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span class="countpanier">0</span></a></li>
                         </ul>
-                        <div class="header__cart__price">prix: <span class="totalpanier"></span></div>
+                        <div class="header__cart__price">Prix: <span class="totalpanier">0</span></div>
                     </div>
                 </div>
             </div>
@@ -149,6 +155,8 @@
             </div>
         </div>
     </header>
+    <!-- Header Section End -->
+
     <!-- Hero Section Begin -->
     <section class="hero hero-normal">
         <div class="container">
@@ -184,8 +192,8 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
+                                <h5>+237 692801450</h5>
+                                <span>24/7 time</span>
                             </div>
                         </div>
                     </div>

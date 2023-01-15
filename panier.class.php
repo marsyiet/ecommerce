@@ -43,6 +43,10 @@
         return $total;
     }
 
+    public function qty($produit_id){
+      return $_SESSION['panier'][$produit_id];
+    }
+
     public function count()
     {
         return array_sum($_SESSION['panier']);
@@ -56,7 +60,31 @@
         }    
     }
 
+    public function inc($produit_id){
+      return $_SESSION['panier'][$produit_id]++;
+    }
+
+    public function dec($produit_id){
+      return $_SESSION['panier'][$produit_id]--;
+    }
+
     public function del($produit_id){
         unset($_SESSION['panier'][$produit_id]);
     }
+
+  public function soustotalproduit($produit_id)
+  {
+    $soustotal = 0;
+        $ids = array_keys($_SESSION['panier']);
+        if (empty($ids)) {
+            $products = array();
+        } else {
+            $products = $this->DB->query('SELECT id, prix FROM produits WHERE id= ?', array($produit_id));
+        }
+        foreach ($products as $product) {
+            $soustotal += $product->prix * $_SESSION['panier'][$produit_id];
+        }
+        return $soustotal;
+  }
+
  }

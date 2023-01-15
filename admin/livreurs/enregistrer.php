@@ -71,7 +71,7 @@ include("../includes/connexion.php");
                   <select class="form-control" id="exampleville" name="ville">
                     <option value="">--</option>
                     <?php foreach($reponse1 as $rep1){ ?>
-                    <option value ="<?php echo $rep1['id'] ?>"><?php echo $rep1['nom']; ?></option>
+                    <option value ="<?php echo $rep1['id'] ?>"><?php echo $rep1['nomVille']; ?></option>
                     <?php } ?>
                   </select>
                 </div>
@@ -80,7 +80,7 @@ include("../includes/connexion.php");
                   <select class="form-control" id="examplequartier" name="quartier">
                     <option value="">--</option>
                     <?php foreach($reponse2 as $rep2){ ?>
-                    <option value="<?php echo $rep2['id'] ?>"><?php echo $rep2['nom']; ?></option>
+                    <option value="<?php echo $rep2['id'] ?>"><?php echo $rep2['nomQuartier']; ?></option>
                     <?php } ?>
                   </select>
                 </div>

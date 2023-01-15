@@ -32,7 +32,7 @@
         if (in_array($extension_upload, $extensions_autorisees))
         {            
           echo "extension correcte";
-          $requete = connect()->prepare("INSERT INTO produits(image,libelle,prix,cathegorie,fournisseur,date,qte) VALUES(?,?,?,?,?,?,?)");
+          $requete = connect()->prepare("INSERT INTO produits(image,nom,prix,cathegorie,fournisseur,date,qte) VALUES(?,?,?,?,?,?,?)");
           $requete->execute(array($image,$nom,$prix,$cathegorie,$fournisseur,$date,$qte));
         }else{
           echo "format de l'image incorrect; veuillez entrer une image aux formats 'jpg', 'jpeg', 'gif', 'png'";

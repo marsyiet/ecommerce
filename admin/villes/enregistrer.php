@@ -1,4 +1,6 @@
 <?php 
+        include("../includes/connexion.php");
+
     if (isset($_POST['enregistrer']))
     {
       $ville = $_POST['ville'];
@@ -8,8 +10,7 @@
         echo $error;
       }
       else{
-        include("../includes/connexion.php");
-        $requete = connect()->prepare("INSERT INTO villes(nom) VALUES(?)");
+        $requete = connect()->prepare("INSERT INTO villes(nomVille) VALUES(?)");
         $requete->execute(array($ville));
         //var_dump($requete);die();
         if($requete){

@@ -1,4 +1,6 @@
 <?php 
+    include("../includes/connexion.php");
+
     if (isset($_POST['enregistrer']))
     {
       $login = $_POST['login'];
@@ -13,7 +15,6 @@
         echo $error;
       }
       else{
-        include("../includes/connexion.php");
         $requete = connect()->prepare("INSERT INTO administrateurs(login,password) VALUES(?,?)");
         $requete->execute(array($login,$password));
         if($requete){
