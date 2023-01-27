@@ -10,6 +10,7 @@
 
         if(empty($mail) && empty($mdp)){
           $error = "veuillez entrer toutes les informations";
+          echo $error;
         }
         else{
           
@@ -48,7 +49,8 @@
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
                     </div>
                     <button type="submit" class="btn btn-primary mr-2" name="connexion">Se connecter</button>
-                </form>
+                </form><br />
+                vous n'avez pas de compte ? <a href="inscription.php"> Créer un compte </a>
             </div>
         </div> 
     </div>

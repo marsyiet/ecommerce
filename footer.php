@@ -61,10 +61,11 @@
     <script src="ogani-master/js/jquery.slicknav.js"></script>
     <script src="ogani-master/js/mixitup.min.js"></script>
     <script src="ogani-master/js/owl.carousel.min.js"></script>
-    <script src="ogani-master/js/main.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/query/1.7.7/jquery.min.js"></script>
     <script type="text/javascript" src="panier.js"></script>
+    <script src="ogani-master/js/main.js"></script>
+
 </body>
 
 </html>

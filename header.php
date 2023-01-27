@@ -116,14 +116,14 @@
             <div class="row"  id="nav">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="ogani-master/img/logo.png" alt=""></a>
+                        <a href="index.php"><img src="ogani-master/img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
                             <li  class="active"><a href="index.php">Accueil</a></li>
-                            <li><a href="grille.php">Grille de prduits</a></li>
+                            <li><a href="grille.php">Grille</a></li>
                             <li><a href="#">Commandes</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="panier.php">Vers le panier</a></li>
@@ -138,9 +138,9 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span id="countfavori">0</span></a></li>
-                            <li><a href="panier.php"><i class="fa fa-shopping-bag"></i> <span class="countpanier"></span></a></li>
+                            <li><a href="panier.php"><i class="fa fa-shopping-bag"></i> <span id="countpanier"></span></a></li>
                         </ul>
-                        <div class="header__cart__price">prix: <span class="totalpanier"></span></div>
+                        <div class="header__cart__price">prix: <span id="totalpanier"></span></div>
                     </div>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>Catégories</span>
                         </div>
                         <ul>
                             <?php $cat = $DB->query('SELECT * FROM cathegories');
@@ -172,7 +172,7 @@
                         <div class="hero__search__form">
                             <form action="filtre.php" method="get">
                                 <div class="hero__search__categories">
-                                    Toutes les cathegories
+                                    Rechercher
                                     <span class="arrow_carrot-down"></span>
                                 </div>
                                 <input type="text" placeholder="Que voulez vous?" name="nom">
@@ -184,8 +184,8 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
+                                <h5>+237 692801450</h5>
+                                <span>Disponible 7j/7</span>
                             </div>
                         </div>
                     </div>

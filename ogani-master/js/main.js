@@ -200,6 +200,22 @@
     });
 
     /*-------------------
+		supprimer articles
+	--------------------- */
+
+    var supp = $('.delpanier');
+    for (let pro of supp){
+        pro.addEventListener('click', function(event){
+            event.preventDefault();
+            const basket = new panier();
+            basket.removeItemFromCart(pro.id);
+            $('#tableau'+pro.id).remove();
+            go(pro.id);
+        });
+    }
+    
+
+    /*-------------------
 		Quantity change
 	--------------------- */
     var proQty = $('.pro-qty');
@@ -208,17 +224,36 @@
     proQty.on('click', '.qtybtn', function () {
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
+        var nom = $button.parent().find('input').attr('name');
         if ($button.hasClass('inc')) {
             var newVal = parseFloat(oldValue) + 1;
+            const basket = new panier();
+            basket.change(nom, newVal);
+            $('#soustotalproduit'+nom).empty().append(basket.getTotalArticle(nom));
+            go(nom);
         } else {
             // Don't allow decrementing below zero
             if (oldValue > 0) {
                 var newVal = parseFloat(oldValue) - 1;
+                const basket = new panier();
+                basket.change(nom, newVal);
+                $('#soustotalproduit'+nom).empty().append(basket.getTotalArticle(nom));
+                go(nom);
+                
             } else {
                 newVal = 0;
             }
         }
         $button.parent().find('input').val(newVal);
+
     });
+    
+    function go(id){
+        const basket = new panier();
+        $('.sommetotale').empty().append(basket.getPrixTotal());
+        $('#totalpanier').empty().append(basket.getPrixTotal());
+        $('#countpanier').empty().append(basket.getNumberProduit());
+    }
 
 })(jQuery);
+

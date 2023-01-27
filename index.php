@@ -109,7 +109,7 @@ if(isset($_SESSION['id'])){
             <?php
             for ($i=1;$i<=$nb_pages;$i++){ 
             if($page!=$i){ ?>
-            <a href="?page=<?php echo $i; ?>" ><?php echo $i ?></a>
+            <a href="index.php?page=<?php echo $i; ?>" ><?php echo $i ?></a>
             <?php }else{ ?>
             <a style=" border: 2px solid green"><?php echo $i ?></a>
             <?php }} ?>

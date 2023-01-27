@@ -10,7 +10,7 @@
                         <h2>Panier de courses</h2>
                         <div class="breadcrumb__option">
                             <a href="index.php">Accueil</a>
-                            <span>Mon Panier</span>
+                            <span>Accueil >> menu >> vers le panier</span>
                         </div>
                     </div>
                 </div>
@@ -46,8 +46,9 @@
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
                         <a href="javascript:history.back()" class="primary-btn cart-btn">CONTINUER MES COURSES</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                        <a href="javascript:refresh()" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                             METTRE A JOUR LE PANIER</a>
+                        <button style="border: none;" class="primary-btn cart-btn" id="vider">vider le panier</button>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -65,10 +66,10 @@
                     <div class="shoping__checkout">
                         <h5>Total du panier</h5>
                         <ul>
-                            <li>Sous-total <span class="totalpanier"></span></li>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Sous-total <span class="sommetotale"> </span></li>
+                            <li>Total <span>...</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">PAIEMENT</a>
+                        <a href="commande.php" class="primary-btn">PAIEMENT</a>
                     </div>
                 </div>
             </div>
