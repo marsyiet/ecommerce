@@ -39,9 +39,7 @@
 let products = localStorage.getItem("panier");
 let v = JSON.parse(products);
 let placeholder = document.querySelector("#data-output");
-let order = document.querySelector("#orderlist");
 let out = "";
-let ord = "";
 for(let product of v) {
     out += `
         <tr id="tableau${product.id}" class="article">
@@ -68,14 +66,10 @@ for(let product of v) {
         </tr>
     `;
 
-    ord += `
-        <li>${product.nom} <span>${product.soustotalproduit}</span></li>
-    `;
-
 }
 
 placeholder.innerHTML = out;
-order.innerHTML = ord;
+
 
 
 

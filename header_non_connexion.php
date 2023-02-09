@@ -144,9 +144,9 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span id="countfavori">0</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span id="countpanier">0</span></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span >0</span></a></li>
                         </ul>
-                        <div class="header__cart__price">Prix: <span id="totalpanier">0</span></div>
+                        <div class="header__cart__price">Prix: <span >0</span></div>
                     </div>
                 </div>
             </div>

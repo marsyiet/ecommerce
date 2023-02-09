@@ -10,6 +10,14 @@
   $reqfour->execute();
   $repfour = $reqfour->fetchAll();
 
+  $reqcoul = connect()->prepare("SELECT * FROM couleurs");
+  $reqcoul->execute();
+  $repcoul = $reqcoul->fetchAll();
+
+  $reqtail = connect()->prepare("SELECT * FROM taille");
+  $reqtail->execute();
+  $reptail = $reqtail->fetchAll();
+
   try{
         $reqprod = connect()->prepare("SELECT * FROM produits WHERE id= ?"); 
         $reqprod->execute(array($id));
@@ -23,6 +31,9 @@
       $date = $_POST['date'];
       $qte = $_POST['qte'];
       $prix = $_POST['prix'];
+      $description = $_POST['description'];
+      $couleur = $_POST['couleur'];
+      $taille = $_POST['taille'];
       $id1 = $_POST['id'];
       $error = "";
    
@@ -32,7 +43,7 @@
         echo $error;
       }
       else{
-        $requete = connect()->prepare("UPDATE produits SET  image= :image, nom = :nom, prix = :prix, cathegorie = :cathegorie, fournisseur = :fournisseur, date = :date, qte = :qte  WHERE id = :id1");
+        $requete = connect()->prepare("UPDATE produits SET  image= :image, nom = :nom, prix = :prix, cathegorie = :cathegorie, fournisseur = :fournisseur, date = :date, qte = :qte, description = :description, couleur = :couleur, taille = :taille  WHERE id = :id1");
         $requete->execute(array(
         'image' => $image,
         'nom' => $nom,
@@ -41,6 +52,9 @@
         'fournisseur' => $fournisseur,
         'date' => $date,
         'qte' => $qte,
+        'description' => $description,
+        'couleur' => $couleur,
+        'taille' => $taille,
         'id1' => $id1 ));
 
         
@@ -117,6 +131,26 @@
                 <div class="form-group">
                   <label for="exampleInputqte">Quantité</label>
                   <input type="number" class="form-control" id="exampleInputDate" name="qte" value="<?php foreach($repprod as $prod){ echo $prod['qte'];}?>">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputdes">Description</label>
+                  <textarea class="form-control" id="exampleInputdes" name="description" value="<?php foreach($repprod as $prod){ echo $prod['description'];}?>"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputcoul">Couleur</label>
+                  <select class="form-control" id="exampleInputcoul" name="fournisseur">
+                    <?php foreach($repcoul as $coul){ ?>
+                    <option ><?php echo $coul['nomCouleur'] ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputtaille">Taille</label>
+                  <select class="form-control" id="exampleInputtaille" name="fournisseur">
+                    <?php foreach($reptail as $tail){ ?>
+                    <option ><?php echo $tail['nomTaille'] ?></option>
+                    <?php } ?>
+                  </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2" name="modifier">Modifier</button>
                 <button class="btn btn-light">Cancel</button>

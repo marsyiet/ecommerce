@@ -11,6 +11,7 @@
 
 (function ($) {
 
+
     /*------------------
         Preloader
     --------------------*/
@@ -179,7 +180,7 @@
     });
     minamount.val('$' + rangeSlider.slider("values", 0));
     maxamount.val('$' + rangeSlider.slider("values", 1));
-
+    
     /*--------------------------
         Select
     ----------------------------*/
@@ -214,6 +215,7 @@
         });
     }
     
+    
 
     /*-------------------
 		Quantity change
@@ -247,13 +249,88 @@
         $button.parent().find('input').val(newVal);
 
     });
+
+    
+    
+    var ajout = $('#ajout');
+    ajout.on('click', function(){
+        document.querySelector('#char-qty').style.display = 'block';
+    });
+    
     
     function go(id){
         const basket = new panier();
         $('.sommetotale').empty().append(basket.getPrixTotal());
         $('#totalpanier').empty().append(basket.getPrixTotal());
         $('#countpanier').empty().append(basket.getNumberProduit());
+
     }
+
+    const note = document.querySelector('#note');
+    const stars = document.querySelectorAll(".la-star");
+
+    for(let star of stars) {
+        star.addEventListener('mouseover', function() {
+            resetStars(note.value);
+            this.style.color = 'gold';
+
+            let previousStar = this.previousElementSibling;
+
+            while(previousStar){
+                previousStar.style.color = 'gold';
+                previousStar = previousStar.previousElementSibling;
+            }
+        });
+
+        star.addEventListener('click', function() {
+            note.value = this.dataset.value;
+            resetStars(note.value);
+
+            star.classList.add('las');
+            star.classList.remove('lar');
+
+
+            let previousStar = this.previousElementSibling;
+
+            
+
+            while(previousStar){
+                previousStar.classList.add('las');
+                previousStar.classList.remove('lar');
+
+                previousStar = previousStar.previousElementSibling;
+            }
+            
+            
+        });
+
+        star.addEventListener('mouseout', function() {
+            resetStars(note.value); 
+        });
+    }
+
+    function resetStars(note = 0) {
+        for(let star of stars) {
+            if(star.dataset.value > note){
+                star.style.color = 'black';
+                star.classList.add('lar');
+                star.classList.remove('las');
+
+            }else{
+                star.style.color = 'gold';
+            }
+        }
+    }
+
+    //document.querySelector('#grille_couleur').addEventListener('change', function () {
+        var elts = document.querySelectorAll('.grille_couleurs');
+        for (var i = 0; i < elts.length; i++) {
+          //  if ( elts[i].checked === false ) break;
+            window.addEventListener('click', function(){ alert(elts[i].value); });
+        }
+        //$('product__item'+elst[i].value).remove();
+
+    //})
 
 })(jQuery);
 

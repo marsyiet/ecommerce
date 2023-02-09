@@ -98,7 +98,7 @@ a:hover,
 a:focus {
 	text-decoration: none;
 	outline: none;
-	color: #2ca444;
+	color: #ceffd8;
 }
 
 ul,
@@ -1179,29 +1179,33 @@ ol {
 	width: 40%;
 }
 
-.sidebar__item__color.sidebar__item__color--white label:after {
+.sidebar__item__color.sidebar__item__color--blanc label:after {
 	border: 2px solid #333333;
 	background: transparent;
 }
 
-.sidebar__item__color.sidebar__item__color--gray label:after {
+.sidebar__item__color.sidebar__item__color--orange label:after {
 	background: #E9A625;
 }
 
-.sidebar__item__color.sidebar__item__color--red label:after {
+.sidebar__item__color.sidebar__item__color--rouge label:after {
 	background: #D62D2D;
 }
 
-.sidebar__item__color.sidebar__item__color--black label:after {
+.sidebar__item__color.sidebar__item__color--noir label:after {
 	background: #252525;
 }
 
-.sidebar__item__color.sidebar__item__color--blue label:after {
+.sidebar__item__color.sidebar__item__color--bleu label:after {
 	background: #249BC8;
 }
 
-.sidebar__item__color.sidebar__item__color--green label:after {
+.sidebar__item__color.sidebar__item__color--vert label:after {
 	background: #3CC032;
+}
+
+.sidebar__item__color.sidebar__item__color--rose label:after {
+	background: #fc3678;
 }
 
 .sidebar__item__color label {
@@ -1797,6 +1801,7 @@ ol {
 	display: inline-block;
 }
 
+
 .product__details__tab {
 	padding-top: 85px;
 }
@@ -2382,7 +2387,7 @@ ol {
 }
 
 .blog__sidebar__item ul li a:hover {
-	color: #7fad39;
+	color: #e6f8cb;
 }
 
 .blog__sidebar__search {
@@ -3466,3 +3471,5 @@ ol {
 		font-size: 24px;
 	}
 }
+
+

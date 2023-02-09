@@ -10,6 +10,14 @@
   $requete2->execute();
   $reponse2 = $requete2->fetchAll();
 
+  $requete3 = connect()->prepare("SELECT * FROM couleurs");
+  $requete3->execute();
+  $reponse3 = $requete3->fetchAll();
+
+  $requete4 = connect()->prepare("SELECT * FROM taille");
+  $requete4->execute();
+  $reponse4 = $requete4->fetchAll();
+
   if (isset($_POST['enregistrer']))
   {
     $image = $_FILES['image']['name'];
@@ -19,12 +27,15 @@
     $date = $_POST['date']; 
     $qte = $_POST['qte'];
     $prix = $_POST['prix'];
+    $description = $_POST['description'];
+    $couleur = $_POST['couleur'];
+    $taille = $_POST['taille'];
 
 
     $extensions_autorisees = array('jpg', 'jpeg', 'gif', 'png');
     $extension_upload = strtolower(  substr(  strrchr($_FILES['image']['name'], '.')  ,1)  );
 
-    if(empty($nom) && empty($cathegorie) && empty($fournisseur) && empty($date) && empty($qte) && empty($prix)){
+    if(empty($nom) && empty($cathegorie) && empty($fournisseur) && empty($date) && empty($qte) && empty($prix) && empty($description) && empty($couleur) && empty($taille)){
       $error = "Veuillez remplir tous les champs"; 
       echo $error;
     }
@@ -32,8 +43,8 @@
         if (in_array($extension_upload, $extensions_autorisees))
         {            
           echo "extension correcte";
-          $requete = connect()->prepare("INSERT INTO produits(image,nom,prix,cathegorie,fournisseur,date,qte) VALUES(?,?,?,?,?,?,?)");
-          $requete->execute(array($image,$nom,$prix,$cathegorie,$fournisseur,$date,$qte));
+          $requete = connect()->prepare("INSERT INTO produits(image,nom,prix,cathegorie,fournisseur,date,qte,description,couleur,taille) VALUES(?,?,?,?,?,?,?,?,?,?)");
+          $requete->execute(array($image,$nom,$prix,$cathegorie,$fournisseur,$date,$qte,$description,$couleur,$taille));
         }else{
           echo "format de l'image incorrect; veuillez entrer une image aux formats 'jpg', 'jpeg', 'gif', 'png'";
         }            
@@ -98,6 +109,24 @@
                 <div class="form-group">
                   <label for="exampleInputnom">Quantité</label>
                   <input type="number" class="form-control" id="exampleInputMail" name="qte">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputdes">Description</label>
+                  <textarea class="form-control" id="exampleInputdes" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputcouleur">Couleur</label>
+                  <select class="js-example-basic-single w-100" name="couleur" style="color:black">
+                    <?php foreach($reponse3 as $rep3){ ?>
+                    <option value="<?php echo $rep3['id']; ?>" ><?php echo $rep3['nomCouleur']; ?></option><?php } ?>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputtaille">Taille</label>
+                  <select class="js-example-basic-single w-100" name="taille" style="color:black">
+                    <?php foreach($reponse4 as $rep4){ ?>
+                    <option value="<?php echo $rep4['id']; ?>" ><?php echo $rep4['nomTaille']; ?></option><?php } ?>
+                  </select>
                 </div>
                 <button type="submit" class="btn btn-primary mr-2 "  name="enregistrer">Enregistrer</button>
                 <a type="button" href="index.php" class="btn btn-light">Cancel</button>

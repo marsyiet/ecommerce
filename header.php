@@ -22,7 +22,9 @@
     <link rel="stylesheet" href="ogani-master/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="ogani-master/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="ogani-master/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="style.css" type="text/css">
+
 
 </head>
 

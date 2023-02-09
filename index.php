@@ -93,14 +93,23 @@ if(isset($_SESSION['id'])){
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="images/<?= $g->image ?>">
                             <ul class="featured__item__pic__hover">
-                                <li><a  href="detail.php?id=<?= $g->id ?>&&d=<?= $g->id ?>"><i class="fa fa-eye"></i></a></li>
+                                <li><a  href="detail.php?id=<?= $g->id ?>&&nom=<?= $g->nom ?>"><i class="fa fa-eye"></i></a></li>
                                 <li><a class="addpanier" href="addpanier.php?id=<?= $g->id ?>&&addpanier=<?= $g->id ?>&&d=<?= $g->id ?>"  value="<?= $g->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
                             <h6><span><a href="#"><?= $g->nom ?></a></span></h6>
                             <h5><span><?= number_format($g->prix, 0, '.', ' '); ?></h5><br />
+                            <!--<div class="product__details__rating">
+                                <i class="lar fa-star"></i>
+                                <i class="lar fa-star"></i>
+                                <i class="lar fa-star"></i>
+                                <i class="lar fa-star"></i>
+                                <i class="lar fa-star"></i>
+                                <p>notez</p>
+                            </div>-->
                         </div>
+                        
                     </div> 
                 </div>
             <?php endforeach ?>
@@ -143,12 +152,12 @@ if(isset($_SESSION['id'])){
         <div class="row">
             <div class="col-lg-4 col-md-6">
                 <div class="latest-product__text">
-                    <h4>Derniers Products</h4>
+                    <h4>Derniers Produits</h4>
                     <div class="latest-product__slider owl-carousel">
                         <div class="latest-prdouct__slider__item">
                             <?php $late = $DB->query("SELECT * FROM produits ORDER BY id DESC LIMIT 4"); ?>
                             <?php foreach ($late as $l): ?>
-                            <a href="detail.php?n=<?=$l->id?>" class="latest-product__item">
+                            <a href="detail.php?id=<?=$l->id?>&&nom=<?=$l->nom?>" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="images/<?= $l->image ?>" alt="">
                                 </div>
@@ -162,7 +171,7 @@ if(isset($_SESSION['id'])){
                         <div class="latest-prdouct__slider__item">
                             <?php $late = $DB->query("SELECT * FROM produits ORDER BY id ASC LIMIT 4"); ?>
                             <?php foreach ($late as $l): ?>
-                            <a href="detail.php?n=<?=$l->id?>" class="latest-product__item">
+                            <a href="detail.php?id=<?=$l->id?>&&nom=<?=$l->nom?>" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="images/<?= $l->image ?>" alt="">
                                 </div>
@@ -183,7 +192,7 @@ if(isset($_SESSION['id'])){
                         <div class="latest-prdouct__slider__item">
                             <?php $lik = $DB->query("SELECT * FROM likes, produits WHERE likes.id_produit = produits.id ORDER BY likes.id DESC LIMIT 4"); ?>
                             <?php foreach ($lik as $l): ?>
-                            <a href="detail.php?n=<?=$l->id?>" class="latest-product__item">
+                            <a href="detail.php?id=<?=$l->id?>&&nom=<?=$l->nom?>" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="images/<?= $l->image ?>" alt="">
                                 </div>
@@ -197,7 +206,7 @@ if(isset($_SESSION['id'])){
                         <div class="latest-prdouct__slider__item">
                             <?php $lik = $DB->query("SELECT * FROM likes, produits WHERE likes.id_produit = produits.id ORDER BY likes.id ASC LIMIT 4"); ?>
                             <?php foreach ($lik as $l): ?>
-                            <a href="detail.php?n=<?=$l->id?>" class="latest-product__item">
+                            <a href="detail.php?id=<?=$l->id?>&&nom=<?=$l->nom?>" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="images/<?= $l->image ?>" alt="">
                                 </div>
@@ -213,12 +222,12 @@ if(isset($_SESSION['id'])){
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="latest-product__text">
-                    <h4>produits les plus commandés</h4>
+                    <h4>produits les mieux notés</h4>
                     <div class="latest-product__slider owl-carousel">
                         <div class="latest-prdouct__slider__item">
-                            <?php $lik = $DB->query("SELECT * FROM likes, produits WHERE likes.id_produit = produits.id ORDER BY likes.id DESC LIMIT 4"); ?>
+                            <?php $lik = $DB->query("SELECT * FROM avis, produits WHERE avis.produit = produits.id ORDER BY avis.note ASC LIMIT 4"); ?>
                             <?php foreach ($lik as $l): ?>
-                            <a href="detail.php?n=<?=$l->id?>" class="latest-product__item">
+                            <a href="detail.php?id=<?=$l->id?>&&nom=<?=$l->nom?>" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="images/<?= $l->image ?>" alt="">
                                 </div>
@@ -230,9 +239,9 @@ if(isset($_SESSION['id'])){
                             <?php endforeach?>
                         </div>
                         <div class="latest-prdouct__slider__item">
-                            <?php $lik = $DB->query("SELECT * FROM likes, produits WHERE likes.id_produit = produits.id ORDER BY likes.id ASC LIMIT 4"); ?>
+                        <?php $lik = $DB->query("SELECT * FROM avis, produits WHERE avis.produit = produits.id ORDER BY avis.note ASC LIMIT 4"); ?>
                             <?php foreach ($lik as $l): ?>
-                            <a href="detail.php?n=<?=$l->id?>" class="latest-product__item">
+                            <a href="detail.php?id=<?=$l->id?>&&nom=<?=$l->nom?>" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="images/<?= $l->image ?>" alt="">
                                 </div>

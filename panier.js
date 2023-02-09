@@ -52,6 +52,9 @@ class panier{
 
     change(produitId, qty){
         let foundProduit = this.panier.find(p => p.id == produitId);
+        if(foundProduit == undefined){
+            alert('ajouteq d abord nor');
+        }
         foundProduit.quantity = qty;
         this.save();
     }
@@ -104,3 +107,4 @@ document.querySelector('#vider').addEventListener('click', function(){
     new panier().vider();
     window.location.reload();
 })
+
