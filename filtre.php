@@ -41,15 +41,7 @@
                     </div> 
                 </div>
             <?php endforeach; ?>
-            <div class="product__pagination" style="margin: auto auto 10% 50%;">
-            <?php
-            for ($i = 1; $i <= $nb_pages; $i++) {
-                if ($page != $i) { ?>
-            <a href="?page=<?php echo $i; ?>" ><?php echo $i ?></a>
-            <?php } else { ?>
-            <a style=" border: 2px solid green"><?php echo $i ?></a>
-            <?php }} ?>
-            </div>    
+                
             <?php } else { ?>
             <p style="margin: 5%;"><h2>Aucun article trouvé</h2></p>
             <?php } ?>
@@ -73,14 +65,6 @@
                 </div> 
             </div>   
             <?php endforeach; ?>
-            <div class="product__pagination" style="margin: auto auto 10% 50%;">
-            <?php
-            for ($i = 1; $i <= $nb_pages; $i++) {
-                if ($page != $i) { ?>
-            <a href="?page=<?php echo $i; ?>" ><?php echo $i ?></a>
-            <?php } else { ?>
-            <a style=" border: 2px solid green"><?php echo $i ?></a>
-            <?php }} ?>
         <?php } else { ?>
             <p style="margin: 5%;"><h2>Aucun article trouvé</h2></p>
         <?php } ?>
@@ -88,5 +72,14 @@
             <p style="margin: 5%;"><h2>Aucun article trouvé</h2></p>
         <?php } ?>
     </div>
-</div>
+    <div class="product__pagination">
+        <?php
+        for ($i = 1; $i <= $nb_pages; $i++) {
+            if ($page != $i) { ?>
+        <a href="?page=<?= $i; ?>" ><?= $i ?></a>
+        <?php } else { ?>
+        <a style=" border: 2px solid green"><?= $i ?></a>
+        <?php }} ?>
+        </div>
+    </div>
 <?php require 'footer.php';?>

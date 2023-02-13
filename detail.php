@@ -286,12 +286,16 @@ if (isset($_GET['id'], $_GET['nom'])) {
                                                 <form class="review-form" action="detail.php?id=<?=$prod->id?>&&nom=<?=$prod->nom?>" method="POST">
                                                     <input class="input" type="text" placeholder="Nom" name="nom">
                                                     <input class="input" type="email" placeholder="Email" name="mail">
-                                                    <textarea class="input" placeholder="Laisser un commentaire" name="commentaire"></textarea>
+                                                    <textarea  class="input" placeholder="Laisser un commentaire" name="commentaire"></textarea>
                                                     <div class="input-rating">
                                                         <span>Votre note: </span>
-                                                        <div class="rates">
-                                                            <i class="lar la-star" data-value="1"></i><i class="lar la-star" data-value="2"></i><i class="lar la-star" data-value="3"></i><i class="lar la-star" data-value="4"></i><i class="lar la-star" data-value="5"></i>
-                                                        </div>
+                                                        <div class="stars">
+															<input id="star5" class="lar la-star" data-value="5" name="rating" value="5" type="radio"><label for="star5"></label>
+															<input id="star4" class="lar la-star" data-value="4" name="rating" value="4" type="radio"><label for="star4"></label>
+															<input id="star3" class="lar la-star" data-value="3" name="rating" value="3" type="radio"><label for="star3"></label>
+															<input id="star2" class="lar la-star" data-value="2" name="rating" value="2" type="radio"><label for="star2"></label>
+															<input id="star1" class="lar la-star" data-value="1" name="rating" value="1" type="radio"><label for="star1"></label>
+														</div>
                                                     </div>
                                                     <input type="hidden" name="note" value="0" id="note"> 
                                                     <button type="submit" name="go" class="site-btn"> Envoyer un avis</button>

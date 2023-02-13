@@ -130,6 +130,13 @@ display: block;
 
 .review-form .input {
 margin-bottom: 15px;
+width: 80%;
+height: 50%;
+}
+
+.review-form textarea{
+	min-height: 50%;
+	min-width: 30%;
 }
 
 .review-form .input-rating {
@@ -173,5 +180,63 @@ ul, ol {
     margin: 0;
     padding: 0;
     list-style: none
+}
+
+.review__widget {
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+
+.review__widget h6 {
+	color: #1c1c1c;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+
+.review__widget ul {
+	width: 50%;
+	float: left;
+}
+
+.review__widget ul li {
+	list-style: none;
+}
+
+.review__widget ul li a {
+	color: #1c1c1c;
+	font-size: 14px;
+	line-height: 32px;
+}
+
+.review__widget p {
+	font-size: 14px;
+	color: #1c1c1c;
+	margin-bottom: 30px;
+}
+
+.review__widget form {
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.review__widget form input {
+	width: 100%;
+	font-size: 16px;
+	padding-left: 20px;
+	color: #1c1c1c;
+	height: 46px;
+	border: 1px solid #ededed;
+}
+
+.review__widget form input::placeholder {
+	color: #1c1c1c;
+}
+
+.review__widget form button {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 0 26px;
+	height: 100%;
 }
 

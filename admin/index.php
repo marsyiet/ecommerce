@@ -15,7 +15,7 @@ if(isset($_SESSION["id"])){
     $reqcom->execute(array());
     $commande = $reqcom->fetchAll();
     $nbcommande = count($commande);
-    $reqadmin = connect()->prepare("SELECT login FROM administrateurs WHERE id = ?");
+    $reqadmin = connect()->prepare("SELECT * FROM administrateurs WHERE id = ?");
     $reqadmin->execute(array($_SESSION['id']));
     $admin = $reqadmin->fetchAll();
 ?>
@@ -39,18 +39,18 @@ if(isset($_SESSION["id"])){
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="navbar-brand-wrapper d-flex justify-content-center">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-          <a class="navbar-brand brand-logo" href="index.html"><img src="../banqueImages/sillhouette.png" alt="logo"/></a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../template/images/logo-mini.svg" alt="logo"/></a>
+          <a class="navbar-brand brand-logo" href="index.php"><img src="../template/images/logo.svg" alt="logo"/></a>
+          <a class="navbar-brand brand-logo-mini" href="index.php"><img src="../template/images/logo-mini.svg" alt="logo"/></a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="typcn typcn-th-menu"></span>
           </button>
         </div>
       </div>
-      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end"  >
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="../banqueImages/man.png" alt="profile"/>
+              <img src="../images/<?php foreach($admin as $ad){echo $ad['photo']; } ?>" alt="profil" style="border-radius: 50%; " >
               <span class="nav-profile-name"><?php foreach($admin as $ad){echo $ad['login']; }?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
@@ -78,7 +78,7 @@ if(isset($_SESSION["id"])){
 
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar" style="height: 100px; overflow-y: scroll;">
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="index.html">
@@ -89,7 +89,7 @@ if(isset($_SESSION["id"])){
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#user" aria-expanded="false" aria-controls="user">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
+              <i class="typcn typcn-group-outline menu-icon"></i>
               <span class="menu-title">Administrateurs</span>
               <i class="menu-arrow"></i>
             </a>
@@ -102,7 +102,7 @@ if(isset($_SESSION["id"])){
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#cathegorie" aria-expanded="false" aria-controls="cathegorie">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
+              <i class="typcn typcn-th-list-outline menu-icon"></i>
               <span class="menu-title">Cathégorie</span>
               <i class="menu-arrow"></i>
             </a>
@@ -115,7 +115,7 @@ if(isset($_SESSION["id"])){
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#client" aria-expanded="false" aria-controls="client">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
+              <i class="typcn typcn-contacts menu-icon"></i>
               <span class="menu-title">Client</span>
               <i class="menu-arrow"></i>
             </a>
@@ -128,7 +128,7 @@ if(isset($_SESSION["id"])){
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#commande" aria-expanded="false" aria-controls="localisation">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
+              <i class="typcn typcn-shopping-cart menu-icon"></i>
               <span class="menu-title">Commandes</span>
               <i class="menu-arrow"></i>
             </a>
@@ -141,7 +141,7 @@ if(isset($_SESSION["id"])){
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#produit" aria-expanded="false" aria-controls="produit">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
+              <i class="typcn typcn-wine menu-icon"></i>
               <span class="menu-title">Produit</span>
               <i class="menu-arrow"></i>
             </a>
@@ -154,7 +154,7 @@ if(isset($_SESSION["id"])){
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#livreur" aria-expanded="false" aria-controls="livreur">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
+              <i class="typcn typcn-time menu-icon"></i>
               <span class="menu-title">Livreur</span>
               <i class="menu-arrow"></i>
             </a>
@@ -167,7 +167,7 @@ if(isset($_SESSION["id"])){
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#fournisseur" aria-expanded="false" aria-controls="fournisseur">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
+              <i class="typcn typcn-phone-outline menu-icon"></i>
               <span class="menu-title">Fournisseurs</span>
               <i class="menu-arrow"></i>
             </a>
@@ -180,7 +180,7 @@ if(isset($_SESSION["id"])){
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ville" aria-expanded="false" aria-controls="ville">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
+              <i class="typcn typcn-location menu-icon"></i>
               <span class="menu-title">Villes</span>
               <i class="menu-arrow"></i>
             </a>
@@ -193,7 +193,7 @@ if(isset($_SESSION["id"])){
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#quartier" aria-expanded="false" aria-controls="quartier">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
+              <i class="typcn typcn-home menu-icon"></i>
               <span class="menu-title">Quartier</span>
               <i class="menu-arrow"></i>
             </a>
@@ -206,7 +206,7 @@ if(isset($_SESSION["id"])){
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#paiement" aria-expanded="false" aria-controls="paiement">
-              <i class="typcn typcn-user-add-outline menu-icon"></i>
+              <i class="typcn typcn-calculator menu-icon"></i>
               <span class="menu-title">Paiement</span>
               <i class="menu-arrow"></i>
             </a>
@@ -216,12 +216,6 @@ if(isset($_SESSION["id"])){
                 <li class="nav-item"> <a class="nav-link" href="paiement/liste.php">Liste</a></li>
               </ul>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="deconnexion.php">
-              <i class="typcn typcn-device-desktop menu-icon"></i>
-              <span class="menu-title">Déconnexion</span>
-            </a>
           </li>
         </ul>
       </nav>

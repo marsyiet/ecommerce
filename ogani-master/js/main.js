@@ -322,15 +322,14 @@
         }
     }
 
-    //document.querySelector('#grille_couleur').addEventListener('change', function () {
-        var elts = document.querySelectorAll('.grille_couleurs');
-        for (var i = 0; i < elts.length; i++) {
-          //  if ( elts[i].checked === false ) break;
-            window.addEventListener('click', function(){ alert(elts[i].value); });
+    var elts = document.querySelectorAll('.grille_couleurs');
+    for(let elt of elts){
+        console.log(elt);
+        elt.addEventListener = function(){
+            $('product__item'+elt.id).style.display = 'none';
         }
-        //$('product__item'+elst[i].value).remove();
+    }
 
-    //})
 
 })(jQuery);
 

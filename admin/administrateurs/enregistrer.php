@@ -5,6 +5,7 @@
     {
       $login = $_POST['login'];
       $password = $_POST['password']; 
+      $image = $_POST['image'];
 
       if(empty($login)){
         $error = "Veuillez entrer votre login"; 
@@ -15,8 +16,8 @@
         echo $error;
       }
       else{
-        $requete = connect()->prepare("INSERT INTO administrateurs(login,password) VALUES(?,?)");
-        $requete->execute(array($login,$password));
+        $requete = connect()->prepare("INSERT INTO administrateurs(photo,login,password) VALUES(?,?,?)");
+        $requete->execute(array($image,$login,$password));
         if($requete){
           header("Location:enregistrer.php");
         }
@@ -44,6 +45,10 @@
             <div class="card-body">
               <h4 class="card-title text-center">Enregistrer un utilisateur</h4>
               <form class="forms-sample" action="enregistrer.php" method="POST">
+                <div class="form-group">
+                  <label for="exampleInputimage">Image</label>
+                  <input type="file" class="form-control" id="exampleInputimage" placeholder="Photo de profil" name="image">
+                </div>
                 <div class="form-group">
                   <label for="exampleInputlogin">login</label>
                   <input type="login" class="form-control" id="exampleInputlogin" placeholder="login" name="login">

@@ -35,7 +35,9 @@
       $couleur = $_POST['couleur'];
       $taille = $_POST['taille'];
       $id1 = $_POST['id'];
+      $ancien_prix = $_POST['ancien_prix'];
       $error = "";
+      //$solde = $_POST['solde'];
    
         
       if(empty($nom) && empty($fournisseur) && empty($cathegorie) && empty($qte)){ 
@@ -43,7 +45,7 @@
         echo $error;
       }
       else{
-        $requete = connect()->prepare("UPDATE produits SET  image= :image, nom = :nom, prix = :prix, cathegorie = :cathegorie, fournisseur = :fournisseur, date = :date, qte = :qte, description = :description, couleur = :couleur, taille = :taille  WHERE id = :id1");
+        $requete = connect()->prepare("UPDATE produits SET  image= :image, nom = :nom, prix = :prix, cathegorie = :cathegorie, fournisseur = :fournisseur, date = :date, qte = :qte, description = :description, couleur = :couleur, taille = :taille, /*solde = :solde, */  ancien_prix = :ancien_prix, WHERE id = :id1");
         $requete->execute(array(
         'image' => $image,
         'nom' => $nom,
@@ -55,6 +57,8 @@
         'description' => $description,
         'couleur' => $couleur,
         'taille' => $taille,
+        //'solde' => $solde,
+        'ancien_prix' => $ancien_prix,
         'id1' => $id1 ));
 
         
@@ -97,7 +101,7 @@
                   <input type="hidden" class="form-control" id="exampleInputnom" value="<?php foreach($repprod as $prod){ echo $prod['id'];}?>" name="id">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputnom">image</label>
+                  <label for="exampleInputimage">image</label>
                   <input type="file" class="form-control" id="exampleInputnom" value="<?php foreach($repprod as $prod){ echo $prod['image'];}?>" name="image">
                 </div>
                 <div class="form-group">
@@ -105,8 +109,12 @@
                   <input type="text" class="form-control" id="exampleInputnom" value="<?php foreach($repprod as $prod){ echo $prod['nom'];}?>" name="nom">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputqte">Prix</label>
+                  <label for="exampleInputprix">Prix</label>
                   <input type="number" class="form-control" id="exampleInputprix" name="prix" value="<?php foreach($repprod as $prod){ echo $prod['prix'];}?>">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputancien">Ancien prix</label>
+                  <input type="number" class="form-control" id="exampleInputancien" name="ancien_prix" value="<?php foreach($repprod as $prod){ echo $prod['ancien_prix'];}?>">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword4">Cathégorie</label>
@@ -130,7 +138,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputqte">Quantité</label>
-                  <input type="number" class="form-control" id="exampleInputDate" name="qte" value="<?php foreach($repprod as $prod){ echo $prod['qte'];}?>">
+                  <input type="number" class="form-control" id="exampleInputqte" name="qte" value="<?php foreach($repprod as $prod){ echo $prod['qte'];}?>">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputdes">Description</label>
@@ -138,7 +146,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputcoul">Couleur</label>
-                  <select class="form-control" id="exampleInputcoul" name="fournisseur">
+                  <select class="form-control" id="exampleInputcoul" name="couleur">
                     <?php foreach($repcoul as $coul){ ?>
                     <option ><?php echo $coul['nomCouleur'] ?></option>
                     <?php } ?>
@@ -146,12 +154,21 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputtaille">Taille</label>
-                  <select class="form-control" id="exampleInputtaille" name="fournisseur">
+                  <select class="form-control" id="exampleInputtaille" name="taille">
                     <?php foreach($reptail as $tail){ ?>
                     <option ><?php echo $tail['nomTaille'] ?></option>
                     <?php } ?>
                   </select>
                 </div>
+                <!--<div class="form-group">
+                  <label for="exampleInputsolde">Solde</label>
+                  <div class="row" >
+                  <label for="exampleInputsoldenon">Non</label>
+                  <input type="radio" class="form-control" id="exampleInputsoldenon" name="solde" value="0">
+                  <label for="exampleInputsoldeoui">oui</label>
+                  <input type="radio" class="form-control" id="exampleInputsoldeoui" name="solde" value="1">
+                  </div>
+                </div>-->
                 <button type="submit" class="btn btn-primary mr-2" name="modifier">Modifier</button>
                 <button class="btn btn-light">Cancel</button>
               </form>

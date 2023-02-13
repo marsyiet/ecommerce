@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 09 fév. 2023 à 17:02
+-- Généré le : lun. 13 fév. 2023 à 10:27
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -30,20 +30,22 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `administrateurs`;
 CREATE TABLE IF NOT EXISTS `administrateurs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `photo` varchar(255) NOT NULL,
   `login` varchar(20) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `etat` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `administrateurs`
 --
 
-INSERT INTO `administrateurs` (`id`, `login`, `password`, `etat`) VALUES
-(1, 'marsyiet', 'ijokpl', 0),
-(2, 'kiki', 'ijokpl', 0),
-(3, 'toto', 'ijokpl', 0);
+INSERT INTO `administrateurs` (`id`, `photo`, `login`, `password`, `etat`) VALUES
+(1, 'me.jpg\r\n', 'marsyiet', 'ijokpl', 0),
+(2, '', 'kiki', 'ijokpl', 0),
+(3, '', 'toto', 'ijokpl', 0),
+(4, 'moi.jpg', 'marius', 'ijokpl', 0);
 
 -- --------------------------------------------------------
 
@@ -60,30 +62,15 @@ CREATE TABLE IF NOT EXISTS `avis` (
   `note` int(11) NOT NULL,
   `commentaire` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `avis`
 --
 
 INSERT INTO `avis` (`id`, `nom`, `mail`, `produit`, `note`, `commentaire`) VALUES
-(41, 'nbjv', 'mbappe@gmail.com', 8, 5, ' bn'),
-(40, 'nbjv', 'mbappe@gmail.com', 8, 5, ' bn'),
-(39, 'dem', 'trent@gmail.com', 8, 4, 'hgcfgx'),
-(37, 'dem', 'trent@gmail.com', 8, 4, 'hgcfgx'),
-(38, 'dem', 'trent@gmail.com', 8, 4, 'hgcfgx'),
-(36, 'banane', 'dembouz@dembouz.com', 8, 5, 'jouigucyxzxjcgh'),
-(35, 'banane', 'dembouz@dembouz.com', 8, 5, 'jouigucyxzxjcgh'),
-(34, 'banane', 'dembouz@dembouz.com', 8, 5, 'jouigucyxzxjcgh'),
-(33, 'banane', 'dembouz@dembouz.com', 8, 5, 'jouigucyxzxjcgh'),
-(32, 'js', 'mbappe@gmail.com', 8, 5, 'kjj'),
-(31, 'js', 'mbappe@gmail.com', 8, 5, 'kjj'),
-(30, 'js', 'mbappe@gmail.com', 8, 5, 'kjj'),
-(29, 'dem', 'mbappe@gmail.com', 8, 4, 'k'),
-(28, 'dem', 'mbappe@gmail.com', 8, 4, 'k'),
-(27, 'dem', 'mbappe@gmail.com', 8, 4, 'k'),
-(26, '', '', 8, 0, ''),
-(42, 'nbjv', 'mbappe@gmail.com', 8, 5, ' bn');
+(57, 'mbappe', 'mbappe@gmail.com', 10, 4, 'prems'),
+(58, 'trent', 'trent@gmail.com', 8, 4, 'nice');
 
 -- --------------------------------------------------------
 
@@ -119,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `cathegories` (
   `libelle` varchar(255) NOT NULL,
   `etat` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `cathegories`
@@ -128,6 +115,8 @@ CREATE TABLE IF NOT EXISTS `cathegories` (
 INSERT INTO `cathegories` (`id`, `libelle`, `etat`) VALUES
 (1, 'jus', 0),
 (2, 'fruits', 0),
+(8, 'fastfood', 0),
+(7, 'legumes', 0),
 (6, 'viande', 0);
 
 -- --------------------------------------------------------
@@ -366,29 +355,34 @@ CREATE TABLE IF NOT EXISTS `produits` (
   `description` text NOT NULL,
   `couleur` int(11) NOT NULL,
   `taille` int(11) NOT NULL,
+  `solde` tinyint(1) NOT NULL DEFAULT '0',
+  `ancien_prix` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `cathegorie` (`cathegorie`),
   KEY `fournisseur` (`fournisseur`),
   KEY `couleur` (`couleur`),
   KEY `taille` (`taille`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `produits`
 --
 
-INSERT INTO `produits` (`id`, `image`, `nom`, `prix`, `cathegorie`, `fournisseur`, `date`, `qte`, `description`, `couleur`, `taille`) VALUES
-(2, 'jusOrange.jpg', 'jus d\'oranges\r\n', 2000, 1, 1, '2022-05-12', 30, '', 0, 0),
-(3, 'raisins.jpg', 'raisins', 1000, 2, 1, '2022-11-22', 10, '', 0, 0),
-(9, 'pomme.jpg', 'pommes', 3000, 2, 1, '2022-12-10', 0, '', 0, 0),
-(4, 'jusRaisin.jpg', 'jus de raisins', 1500, 1, 1, '2022-11-28', 40, '', 0, 0),
-(6, 'mangue.jpg', 'Mangue', 3000, 2, 1, '2022-11-12', 10, '', 0, 0),
-(7, 'orange.jpg', 'Oranges', 3000, 2, 1, '2022-11-28', 50, '', 0, 0),
-(8, 'pasteque.jpg', 'Pasteque', 3000, 2, 1, '2022-02-13', 30, 'La pastèque, aussi appelée melon d\'eau au Québec, est une espèce de plantes herbacées de la famille des Cucurbitacées, originaire d\'Afrique, largement cultivée pour ses gros fruits lisses, à chair rouge, jaune, verdâtre ou blanche et à graines noires ou rouges.', 0, 0),
-(10, 'briqueJus.jpg', 'jus cocktail', 4000, 1, 1, '2022-12-14', 45, '', 0, 0),
-(11, 'goyave.jpg', 'goyaves', 1500, 2, 1, '2022-11-21', 100, '', 0, 0),
-(12, 'fruits.jpg', 'pack de fruits', 5000, 2, 1, '2023-01-08', 80, 'packet', 0, 0),
-(13, 'viande.jpg', 'viande de bÅ“uf  sans os', 5000, 6, 1, '2023-01-15', 60, 'viande ', 1, 1);
+INSERT INTO `produits` (`id`, `image`, `nom`, `prix`, `cathegorie`, `fournisseur`, `date`, `qte`, `description`, `couleur`, `taille`, `solde`, `ancien_prix`) VALUES
+(2, 'jusOrange.jpg', 'jus d\'oranges\r\n', 2000, 1, 1, '2022-05-12', 30, '', 0, 0, 1, 2500),
+(3, 'raisins.jpg', 'raisins', 1000, 2, 1, '2022-11-22', 10, '', 0, 0, 0, 0),
+(9, 'pomme.jpg', 'pommes', 3000, 2, 1, '2022-12-10', 0, '', 0, 0, 0, 0),
+(4, 'jusRaisin.jpg', 'jus de raisins', 1500, 1, 1, '2022-11-28', 40, '', 0, 0, 0, 0),
+(6, 'mangue.jpg', 'Mangue', 3000, 2, 1, '2022-11-12', 10, '', 0, 0, 0, 0),
+(7, 'orange.jpg', 'Oranges', 3000, 2, 1, '2022-11-28', 50, '', 0, 0, 0, 0),
+(8, 'pasteque.jpg', 'Pasteque', 3000, 2, 1, '2022-02-13', 30, 'La pastèque, aussi appelée melon d\'eau au Québec, est une espèce de plantes herbacées de la famille des Cucurbitacées, originaire d\'Afrique, largement cultivée pour ses gros fruits lisses, à chair rouge, jaune, verdâtre ou blanche et à graines noires ou rouges.', 0, 0, 0, 0),
+(10, 'briqueJus.jpg', 'jus cocktail', 4000, 1, 1, '2022-12-14', 45, '', 0, 0, 0, 0),
+(11, 'goyave.jpg', 'goyaves', 1500, 2, 1, '2022-11-21', 100, '', 0, 0, 0, 0),
+(12, 'fruits.jpg', 'pack de fruits', 5000, 2, 1, '2023-01-08', 80, 'packet', 0, 0, 0, 0),
+(13, 'viande.jpg', 'viande sans os\r\n', 5000, 6, 1, '2023-01-15', 60, 'viande ', 1, 1, 1, 7000),
+(14, 'pd-2.jpg', 'pack legumes', 2000, 7, 1, '2023-02-05', 50, '', 3, 1, 0, 0),
+(15, 'hamburger.jpg', 'Humberger pack de 5', 3000, 8, 1, '2023-02-12', 50, '', 1, 3, 1, 5000),
+(16, 'poivron.jpg', 'poivrons', 1000, 7, 1, '2023-02-04', 41, 'pl', 3, 2, 0, 0);
 
 -- --------------------------------------------------------
 

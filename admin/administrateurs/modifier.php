@@ -10,6 +10,7 @@
 
       $login = $_POST['login'];
       $password = $_POST['password'];
+      $image = $_POST['image'];
       $id1 = $_POST['id'];
       $error = "";
    
@@ -19,8 +20,9 @@
         echo "error";
       }
       else{
-        $requete = connect()->prepare("UPDATE administrateurs SET  login = :login, password = :password WHERE id = :id1");
+        $requete = connect()->prepare("UPDATE administrateurs SET  photo = :image, login = :login, password = :password WHERE id = :id1");
         $requete->execute(array(
+        'photo' => $image,
         'login' => $login,
         'password' => $password,
         'id1' => $id1 ));
@@ -63,6 +65,10 @@
               <form class="forms-sample" action="modifier.php" method="POST">
                 <div class="form-group">
                   <input type="hidden"  class="form-control" id="exampleInputId" value="<?php foreach($reponse as $rep){echo $rep['id'];} ?>" name="id">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputphoto">Photo</label>
+                  <input type="file" class="form-control" id="exampleInputphoto"  value="<?php foreach($reponse as $rep){echo $rep['photo'];} ?>" name="image">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputlogin">login</label>

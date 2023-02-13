@@ -86,16 +86,24 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
-                            <ul>
-                                <li>Nos adresses <i class="fa fa-envelope"></i> etoundimarius237@gmail.com</li>
-                            </ul>
+                            <?php
+                                $client = $DB->query("SELECT * FROM clients WHERE id = ?",array($_SESSION['id']));
+                                 foreach($client as $c): ?>
+                            <div class="header__top__right__language">
+                                <img src="images/<?=$c->image?>" alt="profil" style="border-radius: 50%;" width="30px" height="auto" >
+                                <div><?=$c->nom?></div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="#">Francais</a></li>
+                                </ul>
+                            </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__right">
                             <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-whatsapp"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__language">
