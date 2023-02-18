@@ -56,11 +56,12 @@
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="index.php">Accueil</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
+                <li><a href="grille.php">Grille</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#">Commandes</a>
                     <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Soldes</a></li>
-                        <li><a href="./shoping-cart.html">Informations</a></li>
+                        <li><a href="panier.php">Vers le panier</a></li>
+                        <li><a href="commande.php">Commander</a></li>
                     </ul>
                 </li>
                 <li><a href="contact.php">Contact</a></li>
@@ -92,10 +93,6 @@
                             <div class="header__top__right__language">
                                 <img src="images/<?=$c->image?>" alt="profil" style="border-radius: 50%;" width="30px" height="auto" >
                                 <div><?=$c->nom?></div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Francais</a></li>
-                                </ul>
                             </div>
                             <?php endforeach; ?>
                         </div>
@@ -115,7 +112,7 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="deconnexion.php"><i class="fa fa-sign-out"></i> Déconnexion</a>
+                                <a href="deconnexion.php" class="clear" ><i class="fa fa-sign-out"></i> Déconnexion</a>
                             </div>
                         </div>
                     </div>
@@ -126,7 +123,7 @@
             <div class="row"  id="nav">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="index.php"><img src="ogani-master/img/logo.png" alt=""></a>
+                        <a href="index.php"><img src="images/FreshShop.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -134,6 +131,7 @@
                         <ul>
                             <li  class="active"><a href="index.php">Accueil</a></li>
                             <li><a href="grille.php">Grille</a></li>
+                            <li><a href="blog.php">Blog</a></li>
                             <li><a href="#">Commandes</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="panier.php">Vers le panier</a></li>
@@ -185,7 +183,7 @@
                                     Rechercher
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="Que voulez vous?" name="nom">
+                                <input type="text" placeholder="Que voulez vous?" name="nom" id="barre" >
                                 <button type="submit" name="recherche" class="site-btn">SEARCH</button>
                             </form>
                         </div>

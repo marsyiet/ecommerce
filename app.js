@@ -70,8 +70,18 @@ for(let product of v) {
 
 placeholder.innerHTML = out;
 
+window.addEventListener('beforeunload', function (e) {
+    localStorage.clear();
+});
 
-
+var clear = document.querySelectorAll('.clear');
+for (var i = 0; i < clear.length; i++) {
+    /*clear[i].addEventListener('click', function (e) {
+        var panier = localStorage.getItem('panier');
+        panier.clear();
+    })*/
+    alert('ok');
+}
 
 
 

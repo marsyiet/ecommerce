@@ -291,3 +291,36 @@
 </section>
 <!-- Latest Product Section End -->
 
+<!-- Blog Section Begin -->
+<section class="from-blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title from-blog__title">
+                        <h2>Tout droit du BLOG</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <?php $blog = $DB->query('SELECT * FROM blog ORDER BY id DESC LIMIT 3');
+                    foreach ($blog as $bl): ?>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="images/<?=$bl->image_produit_blog?>" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> <?=$bl->date_article?></li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="blog_details.php?id=<?=$bl->id?>"><?=$bl->titre_article?></a></h5>
+                            <p><?=$bl->apercu_article?> </p>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach ?>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->

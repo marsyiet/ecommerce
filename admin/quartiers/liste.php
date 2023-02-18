@@ -39,7 +39,7 @@ include("../includes/connexion.php");
                               foreach($quartier as $quar){ ?>
                               <tr>
                                 <td><?php echo $i; ?></td>
-                                <td><?php echo $quar['nom']; ?></td>
+                                <td><?php echo $quar['nomVille']; ?></td>
                                 <td>
                                     <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $quar['id']; ?>">
                                         <i class="typcn typcn-edit"></i>

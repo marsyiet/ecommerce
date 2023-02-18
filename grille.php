@@ -1,5 +1,4 @@
 <?php
-    session_start();
     if(isset($_SESSION['id'])){
         require 'header.php';
     }else{
@@ -38,7 +37,12 @@
                                 <?php $cat = $DB->query("SELECT * FROM cathegories");
                                     foreach($cat as $c):
                                 ?>
-                                <li><a href="filtre.php?id=<?=$c->id?>"><?=$c->libelle?></a></li>
+                                <li>
+                                    <label for="<?=$c->id?>">
+                                        <?=$c->libelle?>
+                                    </label>
+                                    <input type="radio" id="<?=$c->id?>" value="<?=$c->id?>" name="cathegorie" class="grille_cathegories" >
+                                </li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
@@ -46,7 +50,7 @@
                             <h4>Prix</h4>
                             <div class="price-range-wrap">
                                 <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                    data-min="100" data-max="5000">
+                                    data-min="1000" data-max="5000">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                                     <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                                     <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -64,10 +68,10 @@
                             <?php $color = $DB->query("SELECT * FROM couleurs"); ?>
                             <?php foreach($color as $co): ?>
                             <div class="sidebar__item__color sidebar__item__color--<?=$co->nomCouleur?>">
-                                <label for="<?=$co->nomCouleur?>">
+                                <label for="co<?=$co->id?>">
                                     <?=$co->nomCouleur?>
                                 </label>
-                                <input type="radio" id="<?=$co->id?>" value="<?=$co->nomCouleur?>" name="couleur" class="grille_couleurs" >
+                                <input type="radio" id="co<?=$co->id?>" value="<?=$co->id?>" name="couleur" class="grille_couleurs" >
                             </div>
                             <?php endforeach; ?>
                         </div>
@@ -78,7 +82,7 @@
                             <div class="sidebar__item__size">
                                 <label for="<?=$ta->nomTaille?>">
                                     <?=$ta->nomTaille?>
-                                    <input type="radio" id="<?=$ta->nomTaille?>">
+                                    <input type="radio" id="<?=$ta->nomTaille?>" value="<?=$ta->id?>" name="taille" class="grille_tailles">
                                 </label>
                             </div>
                             <?php endforeach; ?>
@@ -151,7 +155,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php $produits = $DB->query("SELECT * FROM produits ORDER BY id DESC"); ?>
+                    <?php $produits = $DB->query("SELECT * FROM  produits ORDER BY produits.id DESC"); ?>
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
@@ -167,7 +171,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span><?= count($produits) ?></span> Produits trouvés</h6>
+                                    <h6><span id="produits_trouves" > </span> Produits trouvés</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -180,8 +184,8 @@
                     </div>
                     <div class="row">
                         <?php foreach ($produits as $prod): ?>
-                        <div class="col-lg-4 col-md-6 col-sm-6" id="product__item<?=$prod->id?>">
-                            <div class="product__item" >
+                        <div class="col-lg-4 col-md-6 col-sm-6 product__item" >
+                            <div >
                                 <div class="product__item__pic set-bg" data-setbg="images/<?= $prod->image ?>">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -195,9 +199,10 @@
                                 </div>
                                 <input type="hidden" value="<?=$prod->id?>" name="id">
                                 <input type="hidden" value="<?=$prod->nom?>" name="nom">
-                                <input type="hidden" value="<?=$prod->prix?>" name="prix" id="prix<?=$prod->id?>">
-                                <input type="hidden" value="<?=$prod->couleur?>" name="couleur">
-                                <input type="hidden" value="<?=$prod->taille?>" name="taille">
+                                <input type="hidden" value="<?=$prod->prix?>" name="prix" class="prix">
+                                <input type="hidden" value="couleur<?=$prod->couleur?>" name="couleur" class="couleur<?=$prod->couleur?>">
+                                <input type="hidden" value="taille<?=$prod->taille?>" name="taille" class="taille<?=$prod->couleur?>">
+                                <input type="hidden" value="cathegorie<?=$prod->cathegorie?>" name="cathegorie" class="cathegorie<?=$prod->cathegorie?>">
                             </div>
                         </div>
                         <?php endforeach;?>

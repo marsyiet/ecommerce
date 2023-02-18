@@ -27,9 +27,9 @@
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder">
+    <!--<div id="preloder">
         <div class="loader"></div>
-    </div>
+    </div>-->
 
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -48,14 +48,15 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="connexion.php"><i class="fa fa-user"></i> Se connecter</a>
-                <a href="inscription.php"><i class="fa fa-user"></i> S'inscrire</a>
+                <a href="connexion.php" class="clear" ><i class="fa fa-user"></i> Se connecter</a>
+                <a href="inscription.php" class="clear" ><i class="fa fa-user"></i> S'inscrire</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Accueil</a></li>
-                <li><a href="grille.php">Grille de produits</a></li>
+                <li class="active"><a href="index.php">Accueil</a></li>
+                <li><a href="grille.php">Grille</a></li>
+                <li><a href="blog.php">Blog</a></li>
                 <li><a href="#">Commandes</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="#">Vers le panier</a></li>
@@ -120,18 +121,19 @@
             <div class="row"  id="nav">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="index.php"><img src="ogani-master/img/logo.png" alt=""></a>
+                        <a href="index.php"><img src="images/FreshShop.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li  class="active"><a href="index.php">Accueil</a></li>
+                            <li class="active"><a href="index.php">Accueil</a></li>
                             <li><a href="grille.php">Grille</a></li>
+                            <li><a href="blog.php">Blog</a></li>
                             <li><a href="#">Commandes</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="panier.php">Vers le panier</a></li>
-                                    <li><a href="commande.php">Commander</a></li>
+                                    <li><a href="#">Vers le panier</a></li>
+                                    <li><a href="#">Commander</a></li>
                                 </ul>
                             </li>
                             <li><a href="contact.php">Contact</a></li>
@@ -179,7 +181,7 @@
                                     Rechercher
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="Que voulez vous?" name="nom">
+                                <input type="text" placeholder="Que voulez vous?" name="nom" id="barre" >
                                 <button type="submit" name="recherche" class="site-btn">SEARCH</button>
                             </form>
                         </div>

@@ -1,4 +1,11 @@
-<?php require 'header.php'; ?>
+<?php
+session_start();
+    if(isset($_SESSION['id'])){
+        require 'header.php';
+        }else {
+            require 'header_non_connexion.php';
+        }
+         ?>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Section Begin -->

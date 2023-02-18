@@ -1221,6 +1221,11 @@ ol {
 	visibility: hidden;
 }
 
+.sidebar__item__color input {
+	position: absolute;
+	visibility: hidden;
+}
+
 .sidebar__item__color label:after {
 	position: absolute;
 	left: 0;

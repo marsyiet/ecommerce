@@ -39,7 +39,7 @@ include("../includes/connexion.php");
                               foreach($ville as $vil){ ?>
                               <tr>
                                 <td><?php echo $i; ?></td>
-                                <td><?php echo $vil['nom']; ?></td>
+                                <td><?php echo $vil['nomVille']; ?></td>
                                 <td>
                                     <a type="button" class="btn btn-warning btn-rounded btn-icon"  href="modifier.php?id=<?php  echo $vil['id']; ?>">
                                         <i class="typcn typcn-document-text"></i>

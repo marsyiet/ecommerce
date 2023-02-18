@@ -26,8 +26,8 @@
             $mixe = $DB->query("SELECT * FROM produits, cathegories WHERE cathegories.libelle = ? AND cathegories.id = produits.cathegorie ORDER BY produits.id DESC LIMIT $debut,$nb_elements_page", array($_GET['id'])); 
             if(count($mixe)>0){
             foreach ($mixe as $g): ?>
-                <div class="col-lg-3 col-md-4 col-sm-6 mix ">      
-                    <div class="featured__item">
+                <div class="col-lg-3 col-md-4 col-sm-6 mix resultats">      
+                    <div class="featured__item ">
                         <div class="featured__item__pic set-bg" data-setbg="images/<?= $g->image ?>">
                             <ul class="featured__item__pic__hover">
                                 <li><a  href="detail.php?id=<?= $g->id ?>&&d=<?= $g->id ?>"><i class="fa fa-eye"></i></a></li>
@@ -50,8 +50,8 @@
             $mixe = $DB->query("SELECT * FROM produits WHERE nom LIKE ? ORDER BY id DESC LIMIT $debut,$nb_elements_page", array('%'.$nom.'%'));
             if(count($mixe)>0){
             foreach ($mixe as $g): ?>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix ">      
-                <div class="featured__item">
+            <div class="col-lg-3 col-md-4 col-sm-6 mix resultats" id="<?=$g->id?>">      
+                <div class="featured__item" >
                     <div class="featured__item__pic set-bg" data-setbg="images/<?= $g->image ?>">
                         <ul class="featured__item__pic__hover">
                             <li><a  href="detail.php?id=<?= $g->id ?>&&d=<?= $g->id ?>"><i class="fa fa-eye"></i></a></li>
@@ -71,15 +71,5 @@
         <?php } else { ?>
             <p style="margin: 5%;"><h2>Aucun article trouvé</h2></p>
         <?php } ?>
-    </div>
-    <div class="product__pagination">
-        <?php
-        for ($i = 1; $i <= $nb_pages; $i++) {
-            if ($page != $i) { ?>
-        <a href="?page=<?= $i; ?>" ><?= $i ?></a>
-        <?php } else { ?>
-        <a style=" border: 2px solid green"><?= $i ?></a>
-        <?php }} ?>
-        </div>
     </div>
 <?php require 'footer.php';?>
