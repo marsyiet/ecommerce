@@ -35,7 +35,7 @@
    
 ?>
 <?php require 'header_non_connexion.php'; ?>
-<div class="col-lg-4 mx-auto" style="margin: 2%">
+  <div class="col-lg-4 mx-auto" style="margin: 2%">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Connectez-vous</h4>
@@ -54,6 +54,5 @@
             </div>
         </div> 
     </div>
-    
 <?php require 'footer.php'; ?>
 

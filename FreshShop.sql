@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 13 fév. 2023 à 10:27
+-- Généré le : dim. 19 fév. 2023 à 21:18
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `administrateurs` (
 
 INSERT INTO `administrateurs` (`id`, `photo`, `login`, `password`, `etat`) VALUES
 (1, 'me.jpg\r\n', 'marsyiet', 'ijokpl', 0),
-(2, '', 'kiki', 'ijokpl', 0),
-(3, '', 'toto', 'ijokpl', 0),
+(2, 'goku.jpg', 'kiki', 'ijokpl', 0),
+(3, 'pedriygavi.jpg', 'toto', 'ijokpl', 0),
 (4, 'moi.jpg', 'marius', 'ijokpl', 0);
 
 -- --------------------------------------------------------
@@ -62,13 +62,14 @@ CREATE TABLE IF NOT EXISTS `avis` (
   `note` int(11) NOT NULL,
   `commentaire` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=60 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `avis`
 --
 
 INSERT INTO `avis` (`id`, `nom`, `mail`, `produit`, `note`, `commentaire`) VALUES
+(59, 'mbappe', 'mbappe@gmail.com', 9, 4, 'bonnes'),
 (57, 'mbappe', 'mbappe@gmail.com', 10, 4, 'prems'),
 (58, 'trent', 'trent@gmail.com', 8, 4, 'nice');
 
@@ -97,6 +98,37 @@ INSERT INTO `baner` (`id`, `image`, `nom`, `alaune`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `blog`
+--
+
+DROP TABLE IF EXISTS `blog`;
+CREATE TABLE IF NOT EXISTS `blog` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `produit_blog` varchar(255) NOT NULL,
+  `image_produit_blog` varchar(255) NOT NULL,
+  `titre_article` varchar(255) NOT NULL,
+  `contenu_article` varchar(255) NOT NULL,
+  `apercu_article` varchar(255) NOT NULL,
+  `date_article` datetime NOT NULL,
+  `photo_auteur_article` varchar(255) NOT NULL,
+  `nom_auteur_article` varchar(255) NOT NULL,
+  `cathegorie_article` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cathegorie_article` (`cathegorie_article`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `blog`
+--
+
+INSERT INTO `blog` (`id`, `produit_blog`, `image_produit_blog`, `titre_article`, `contenu_article`, `apercu_article`, `date_article`, `photo_auteur_article`, `nom_auteur_article`, `cathegorie_article`) VALUES
+(1, 'pattes ', 'pattes.jpg', 'Recette délicieuse de pattes', 'bon la j\'ai pas trop d\'inspi mais voila quoi, prends tout ce que tu as tu mets dans l\'assiette, bon la j\'ai pas trop d\'inspi mais voila quoi, prends tout ce que tu as tu mets dans l\'assiette,', 'bon la j\'ai pas trop d\'inspi mais voila quoi, prends tout ce que tu as tu mets dans l\'assiette', '2023-02-15 08:44:09', 'moi.jpg', 'Marsyiet', 1),
+(2, 'Panier de légumes frais', 'panier_legumes.jpg', 'Les vertus des legumes dans la perte de poids', 'le legumes sont cool pour perdre du poids ', 'le legumes sont cool pour perdre du poids ', '2023-02-15 10:18:27', 'kiki.jpg', 'MR Kiki', 2),
+(3, 'Fraises', 'fraise.jpg', 'FRAISES sont-elles si rares ??', 'soub=vent tres recherchees, non pas pour leur gout ou peut etre, mais surtout pour leur popularite', 'soub=vent tres recherchees, non pas pour leur gout ou peut etre, mais surtout pour leur popularite', '2023-02-15 10:38:26', 'moi.jpg', 'Marsyiet', 3);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `cathegories`
 --
 
@@ -118,6 +150,34 @@ INSERT INTO `cathegories` (`id`, `libelle`, `etat`) VALUES
 (8, 'fastfood', 0),
 (7, 'legumes', 0),
 (6, 'viande', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cathegorie_blog`
+--
+
+DROP TABLE IF EXISTS `cathegorie_blog`;
+CREATE TABLE IF NOT EXISTS `cathegorie_blog` (
+  `id_cathegorie_blog` int(10) NOT NULL AUTO_INCREMENT,
+  `nom_cathegorie_blog` varchar(255) NOT NULL,
+  `tag1` int(11) NOT NULL,
+  `tag2` int(11) NOT NULL,
+  `tag3` int(11) NOT NULL,
+  PRIMARY KEY (`id_cathegorie_blog`),
+  KEY `tag1` (`tag1`),
+  KEY `tag2` (`tag2`),
+  KEY `tag3` (`tag3`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `cathegorie_blog`
+--
+
+INSERT INTO `cathegorie_blog` (`id_cathegorie_blog`, `nom_cathegorie_blog`, `tag1`, `tag2`, `tag3`) VALUES
+(1, 'Recette de pattes', 2, 6, 7),
+(2, 'Mix de legumes', 7, 6, 2),
+(3, 'Fruit', 2, 6, 7);
 
 -- --------------------------------------------------------
 
