@@ -23,9 +23,11 @@
     <link rel="stylesheet" href="ogani-master/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="ogani-master/css/style.css" type="text/css">
     <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="modal.css" type="text/css">
 </head>
 
 <body>
+
     <!-- Page Preloder -->
     <!--<div id="preloder">
         <div class="loader"></div>
@@ -59,8 +61,8 @@
                 <li><a href="blog.php">Blog</a></li>
                 <li><a href="#">Commandes</a>
                     <ul class="header__menu__dropdown">
-                        <li><a href="#">Vers le panier</a></li>
-                        <li><a href="#">Commander</a></li>
+                        <li><a href="panier.php">Panier</a></li>
+                        <li><a href="commande.php">Commander</a></li>
                     </ul>
                 </li>
                 <li><a href="contact.php">Contact</a></li>
@@ -132,8 +134,8 @@
                             <li><a href="blog.php">Blog</a></li>
                             <li><a href="#">Commandes</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="#">Vers le panier</a></li>
-                                    <li><a href="#">Commander</a></li>
+                                    <li><a href="panier.php">Panier</a></li>
+                                    <li><a href="commande.php">Commander</a></li>
                                 </ul>
                             </li>
                             <li><a href="contact.php">Contact</a></li>

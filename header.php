@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="ogani-master/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="style.css" type="text/css">
-
+    <link rel="stylesheet" href="modal.css" type="text/css">
 
 </head>
 
@@ -61,7 +61,7 @@
                 <li><a href="#">Commandes</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="panier.php">Vers le panier</a></li>
-                        <li><a href="commande.php">Commander</a></li>
+                        <li><a href="liste_commande.php">Dernieres commandes</a></li>
                     </ul>
                 </li>
                 <li><a href="contact.php">Contact</a></li>

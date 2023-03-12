@@ -1,0 +1,18 @@
+{
+    "name": "freshshop/mail",
+    "description": "auteur marius",
+    "autoload": {
+        "psr-4": {
+            "Freshshop\\Mail\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "marius",
+            "email": "etoundmarius237@gmail.com"
+        }
+    ],
+    "require": {
+        "swiftmailer/swiftmailer": "^5.4"
+    }
+}

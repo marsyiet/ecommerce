@@ -1,4 +1,10 @@
-<?php require 'header.php'; ?>
+<?php
+session_start();
+    if(isset($_SESSION['id'])){
+        require 'header.php';
+    } else {
+        require 'header_non_connexion.php';
+    } ?>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -7,9 +13,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Checkout</h2>
+                        <h2>commande</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Accueil</a>
+                            <a href="index.php">Accueil</a>
                             <span>menu >> commandes >> commander</span>
                         </div>
                     </div>
@@ -113,10 +119,10 @@
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul id="orderlist">
-                                    
+
                                 </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                                <div class="checkout__order__total">Total <span>$750.99</span></div>
+                                <div class="checkout__order__subtotal">Subtotal <span id="subtotalorder"></span></div>
+                                <div class="checkout__order__total">Total <span id="totalorder">$750.99</span></div>
                                 <div class="checkout__input__checkbox">
                                     <label for="acc-or">
                                         Create an account?
@@ -140,7 +146,12 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                                <?php 
+                                    if(isset($_POST['order'])){ 
+                                        if(isset($_SESSION['id'])){
+                                            header("Location:google.com");
+                                        }else{ require 'popup.php'; }}?>
+                                <button type="submit" class="site-btn" name="order" >PROCEDER AU PAIEMENT</button>
                             </div>
                         </div>
                     </div>

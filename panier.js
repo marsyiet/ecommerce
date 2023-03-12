@@ -102,9 +102,10 @@ class panier{
 document.querySelector('#countpanier').append(new panier().getNumberProduit());
 document.querySelector('#totalpanier').append(new panier().getPrixTotal());
 document.querySelector('.sommetotale').append(new panier().getPrixTotal());
+document.querySelector('#subtotalorder').append(new panier().getPrixTotal());
 
-document.querySelector('#vider').addEventListener('click', function(){
+/*document.querySelector('#vider').addEventListener('click', function(){
     new panier().vider();
     window.location.reload();
 })
-
+*/

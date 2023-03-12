@@ -1,4 +1,5 @@
 <?php
+session_start();
     if(isset($_SESSION['id'])){
         require 'header.php';
     }else{
@@ -94,7 +95,7 @@
                                     <div class="latest-prdouct__slider__item">
                                         <?php $late = $DB->query("SELECT * FROM produits ORDER BY id DESC LIMIT 4"); ?>
                                         <?php foreach ($late as $l): ?>
-                                        <a href="#" class="latest-product__item">
+                                        <a href="detail.php?id=<?= $l->id ?>&&nom=<?= $l->nom ?>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
                                                 <img src="images/<?=$l->image?>" alt="">
                                             </div>
@@ -108,7 +109,7 @@
                                     <div class="latest-prdouct__slider__item">
                                         <?php $late = $DB->query("SELECT * FROM produits ORDER BY id ASC LIMIT 4"); ?>
                                         <?php foreach ($late as $l): ?>
-                                        <a href="#" class="latest-product__item">
+                                        <a href="detail.php?id=<?= $l->id ?>&&nom=<?= $l->nom ?>" class="latest-product__item">
                                             <div class="latest-product__item__pic">
                                                 <img src="images/<?=$l->image?>" alt="">
                                             </div>
@@ -140,7 +141,7 @@
                                             <div class="product__discount__percent">-<?= ceil(100 - 100 * ($sol->prix / $sol->ancien_prix)) ?> %</div>
                                             <ul class="product__item__pic__hover">
                                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                <li><a  href="detail.php?id=<?= $sol->id ?>&&nom=<?= $sol->nom ?>"><i class="fa fa-eye"></i></a></li>
                                                 <li><a href="addpanier.php?id=<?=$sol->id?>&&addpanier=<?=$sol->id?>"><i class="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
@@ -189,8 +190,8 @@
                                 <div class="product__item__pic set-bg" data-setbg="images/<?= $prod->image ?>">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a  href="detail.php?id=<?= $prod->id ?>&&nom=<?= $prod->nom ?>"><i class="fa fa-eye"></i></a></li>
+                                        <li><a href="addpanier.php?id=<?=$prod->id?>&&addpanier=<?=$prod->id?>"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -200,9 +201,9 @@
                                 <input type="hidden" value="<?=$prod->id?>" name="id">
                                 <input type="hidden" value="<?=$prod->nom?>" name="nom">
                                 <input type="hidden" value="<?=$prod->prix?>" name="prix" class="prix">
-                                <input type="hidden" value="couleur<?=$prod->couleur?>" name="couleur" class="couleur<?=$prod->couleur?>">
-                                <input type="hidden" value="taille<?=$prod->taille?>" name="taille" class="taille<?=$prod->couleur?>">
-                                <input type="hidden" value="cathegorie<?=$prod->cathegorie?>" name="cathegorie" class="cathegorie<?=$prod->cathegorie?>">
+                                <input type="hidden" value="couleur<?=$prod->couleur?>" name="couleur" class="couleurs<?=$prod->couleur?>">
+                                <input type="hidden" value="taille<?=$prod->taille?>" name="taille" class="tailles<?=$prod->taille?>">
+                                <input type="hidden" value="cathegorie<?=$prod->cathegorie?>" name="cathegorie" class="cathegories<?=$prod->cathegorie?>">
                             </div>
                         </div>
                         <?php endforeach;?>

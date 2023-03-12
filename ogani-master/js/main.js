@@ -256,6 +256,7 @@
     var ajout = $('#ajout');
     ajout.on('click', function(){
         document.querySelector('#char-qty').style.display = 'block';
+        ajout.style.display = 'none';
     });
     
     

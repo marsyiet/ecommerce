@@ -1,5 +1,11 @@
+<div class="modal" id="modal_accueil">
+    <div class="modal-back"></div>
+    <div class="modal-container">
+        <h3>Modale ici</h3><br />
+        <button id="modal-close" ><i class="fa fa-close"></i></button>
+    </div>
+</div>
 <!-- Hero Section Begin -->
-    
 <section class="hero">
     <div class="container">
         <div class="row">
@@ -90,7 +96,8 @@
                             data-setbg="images/<?=$s->image?>">
                             <div class="product__discount__percent">-<?= ceil(100 - 100 * ($s->prix / $s->ancien_prix)) ?> %</div>
                             <ul class="product__item__pic__hover">
-                                <li><a  href="detail.php?id=<?= $s->id ?>&&nom=<?= $s->nom ?>"><i class="fa fa-eye"></i></a></li>
+                                <li><a class="addfavori" href="addfavori.php?id=<?= $s->id ?>&&addfavori=<?= $s->id ?>"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="detail.php?id=<?= $s->id ?>&&nom=<?= $s->nom ?>"><i class="fa fa-eye"></i></a></li>
                                 <li><a class="addpanier" href="addpanier.php?id=<?= $s->id ?>&&addpanier=<?= $s->id ?>"  value="<?= $s->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
@@ -106,6 +113,7 @@
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="images/<?= $s->image ?>">
                             <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                 <li><a  href="detail.php?id=<?= $s->id ?>&&nom=<?= $s->nom ?>"><i class="fa fa-eye"></i></a></li>
                                 <li><a class="addpanier" href="addpanier.php?id=<?= $s->id ?>&&addpanier=<?= $s->id ?>&&d=<?= $s->id ?>"  value="<?= $s->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
@@ -135,6 +143,7 @@
                                     data-setbg="images/<?=$sol->image?>">
                                     <div class="product__discount__percent">-<?= ceil(100 - 100 * ($sol->prix / $sol->ancien_prix)) ?> %</div>
                                     <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a  href="detail.php?id=<?= $sol->id ?>&&nom=<?= $sol->nom ?>"><i class="fa fa-eye"></i></a></li>
                                         <li><a class="addpanier" href="addpanier.php?id=<?= $sol->id ?>&&addpanier=<?= $sol->id ?>"  value="<?= $sol->id ?>"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>

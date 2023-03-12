@@ -7,9 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="col-lg-4 mx-auto">
-        <div class="card-body">
-            <h1 class="card-title">Popup</h2>
+    <div id="modal_connexion">
+        <div class="modal-back"></div>
+        <div class="modal-container">
+            <h3>Modale ici</h3><br />
+            <button id="modal-close" ><i class="fa fa-close"></i></button>
         </div>
     </div>
 </body>

@@ -1,3 +1,6 @@
+//---------------------------------------------------------------- LES RECHERCHES ----------------------------------------------------------------
+
+
 // fonction de filtre dynamique
 
 function filterData(letters, elements){
@@ -37,31 +40,23 @@ var minamount = document.querySelector('#minamount')
 var maxamount = document.querySelector('#maxamount')
 
 //function de la grille
-function grille(elements, element) {
-    var elements = document.querySelectorAll('.grille_' + elements)
 
-    for(var i = 0; i < elements.length; i++) {
-        elements[i].addEventListener('change', (e)=>{
-            const items = document.querySelectorAll('.product__item');
-            const elemetnInput = document.querySelectorAll('.'+ element +e.target.value)
-            for(let item of items){ 
-                item.style.display = 'none';
-            } 
-            for(let inp of elemetnInput){
-                inp.parentElement.parentElement.style.display = 'block';   
-            }
-        })
-    }
+
+var elements = document.querySelectorAll('.grille_couleurs')
+for(var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener('click', (e)=>{ 
+    const items = document.querySelectorAll('.product__item');
+    const elementInput = document.querySelectorAll('.couleurs' + e.target.value)
+        for(let item of items){ 
+            item.style.display = 'none';
+        } 
+        for(let inp of elementInput){
+            inp.parentElement.parentElement.style.display = 'block';   
+        }
+    })
 }
 
-// cathegories
-grille('cathegories', 'cathegorie')
 
-// les couleurs
-grille('couleurs', 'couleur');
-
-// taille 
-grille('tailles', 'taille');
 
 // prix
 const bar = document.querySelector('.price-range');
@@ -98,6 +93,3 @@ maxamount.addEventListener('input', function(){
         }
     }
 })
-
-
-
